@@ -4,7 +4,8 @@
 	<meta charset="UTF-8">
 	<title>Registration</title>
 	<link rel="stylesheet/less" href="style/style.less">
-	<script type="text/javascript" src="lib/less.min.js"></script> 
+	<script type="text/javascript" src="lib/less.min.js"></script>
+	<script type="text/javascript" src="script/scriptRegistration.js"></script> 
 </head>
 <body>
 	<div class = "wrap">
@@ -19,7 +20,53 @@
 					</ul>
 				</nav>
 			</header>
-			<main class="content">
+			<main class="contant-main">
+				<div>
+				<h2>ToDoList</h2>
+				<form action="">
+					<fieldset>
+						<legend>Registration</legend>
+						<div class="elem">
+							<div class="lbl__elem">
+								<label for="login">login:</label>
+							</div>
+							<div>
+								<input id="login" type="text" placeholder="Enter your login" required>
+							</div>
+						</div>
+						<div class="elem">
+							<div class="lbl__elem">
+								<label for="email">e-mail:</label>
+							</div>
+							<div>
+								<input id="email" type = "email" placeholder="Enter your e-mail" required>
+							</div>
+						</div>
+						<br>
+						<div class="elem">
+							<div class="lbl__elem">
+								<label for="pass">password: </label>
+							</div>
+							<div>							
+								<input id="pass" type="password" placeholder="Enter your password" required>
+							</div>
+						</div>
+						<br>
+						<div class="elem">
+							<div class="lbl__elem">
+								<label for="pass2">password again:</label>
+							</div>
+							<div>
+								<input id="pass2" type = "password" placeholder="Repeat your password" required>
+							</div>	
+						</div>
+						<br>
+						<div>
+							<input type="submit" name="send" value="registration">
+						</div>
+					</fieldset>
+				</form>
+				</div>
 			</main>
 		</div>
 		<div class="footer">
