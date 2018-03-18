@@ -10,14 +10,47 @@ body {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	align-items: center;
+	align-items: @layout-center;
 }
 
 .navbar {
 	height: @height-nav;
-	background-color: red;
+	background-color: @color-black;
 	display: flex;
 	flex-direction: row;
-	justify-content: space-between;
-	align-items: center;
+	align-items: @layout-center;
+}
+
+.navbar_img-logo {
+	padding-top: @padding-nav-img;
+	padding-left: @padding-nav-img;
+}
+
+.img-logo {
+	width: @height-img-logo;
+	height: @width-img-logo;
+}
+
+ul {
+    list-style-type: none;
+    margin: @margin-body;
+    padding: @padding-body;
+    overflow: hidden;
+    background-color: @color-black;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: @color-white;
+    text-align: center;
+    padding: @padding__ToDoList;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: @color-black;
 }
