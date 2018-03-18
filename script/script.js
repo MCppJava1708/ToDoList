@@ -12,18 +12,21 @@ for (i = 0; i < myNodelist.length; i++) {
 // Удаление записи
 var close = document.getElementsByClassName("close");
 var i;
-for (i = 0; i < close.length; i++) {
-  close[i].onclick = function() {
+for (i = 0; i < close.length; i++) 
+{
+  close[i].onclick = function() 
+  {
     var div = this.parentElement;
-    div.style.display = "none";
+    div.style.display = "none";//заменить на удаление из БД
   }
 }
 
 // Добавьте символ «checked», когда вы нажимаете на элемент списка.
-var list = document.querySelector('ul');
+//var list = document.querySelector('ul');
+var list = getElementsByClassName('task-ul');
 list.addEventListener('click', function(ev) {
   if (ev.target.tagName === 'LI') {
-    ev.target.classList.toggle('checked');
+    ev.target.classList.toggle('checked');//заменить и/или добавить замену статуса в БД
   }
 }, false);
 
