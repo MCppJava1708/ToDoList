@@ -6,7 +6,7 @@ body {
 }
 
 .page-header {
-	height: 50%;
+	height: @height-header;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
@@ -77,5 +77,16 @@ footer {
 }	
 
 .content {
-	min-height: calc(150vh - 80px);
+	min-height: calc(100vh - 80px);
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
+
+.conten-form_center {
+	width: @width-form_center;
+	height: 250px;
+	overflow: auto;
+	flex-box: left;
+}
+
