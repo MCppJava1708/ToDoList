@@ -7,45 +7,51 @@
 	<script type="text/javascript" src="lib/less.min.js"></script>
 </head>
 <body>
-	<header>
-		<nav class="navbar">
-			<div class="navbar_img-logo">
-				<img class="img-logo" src="images/logo.png" alt="">
-			</div>
-			<ul>
-				<li><a class="active" href="index.html">ToDoList</a></li>
-			</ul>
-		</nav>
-	</header>
-	<main class="content">
-		<div class="content-form_center">
-				<h2>ToDoList</h2>
+	<div class = "wrap">
+		<div class = "main main_color">
+			<header>
+				<nav class="navbar">
+					<div class="navbar_img-logo">
+						<img class="img-logo" src="images/logo.png" alt="">
+					</div>
+					<ul>
+						<li><a class="active" href="index.html">ToDoList</a></li>
+					</ul>
+				</nav>
+			</header>
+			<main class="content-main-login">
+				<h2 class="auth-label">ToDoList</h2>
 				<fieldset>
-					<div class="div-authorization">
-						<div class="div-lable">
-							<label for="name">Username or email address</label>
-						</div>
-						<div class="div-authorization-input">
-							<input class="content-input_width_height input-border_style" type="text">
-						</div>
-						<div class="div-lable">
-							<label for="name">Password</label>
-						</div>
-						<div class="div-authorization-input" >
-							<input class="content-input_width_height input-border_style" type="text">
-						</div>
-						<div class="div-authorization-input">
-							<button class="content-input_width_height input-border_style buutton-color buutton-color">Sign in</button>
+					<div class="content-form_center">
+						<div class="div-authorization">
+							<div class="div-lable">
+								<label for="name">Username or email address</label>
+							</div>
+							<div class="div-authorization-input">
+								<input id="inputLogin" class="content-input_size input-border_style" type="text" placeholder="Enter yout user name or email address">
+							</div>
+							<div class="div-lable">
+								<label for="name">Password</label>
+							</div>
+							<div class="div-authorization-input" >
+								<input id="inputPassword" class="content-input_size input-border_style" placeholder="Enter yout password" type="text">
+							</div>
+							<div class="div-authorization-input">
+								<button id="btnSignIn" class="button-size button-border_style buutton-color">Sign in</button>
+							</div>
 						</div>
 					</div>
 				</fieldset>
+			</main>
 		</div>
-	</main>
-	<footer>
-		<div class="navbar_img-logo">
-			<img class="img-logo" src="images/logo.png" alt="">
+		<div class="footer">
+			<footer>
+				<div class="navbar_img-logo">
+					<img class="img-logo" src="images/logo.png" alt="">
+				</div>
+				<div class="page-footer__paragraf"><p>Team play</p></div>
+			</footer>
 		</div>
-		<div class="page-footer__paragraf"><p>Team play</p></div>
-	</footer>
+	</div>
 </body>
 </html>
