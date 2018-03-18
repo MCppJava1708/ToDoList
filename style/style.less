@@ -1,8 +1,21 @@
 @import "variables.less";
 
-body {
+html,body {
 	margin: @margin-body;
 	height: @height-body;
+	height: 100%;
+}
+
+.wrap {
+	display: flex;
+ 	flex-direction: column;
+	height: 100%;
+}
+
+.main {
+	flex-grow: 1;
+	flex-shrink: 0;
+	flex-basis: auto;
 }
 
 .navbar {
@@ -58,7 +71,7 @@ footer {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	align-items: center;
+	align-items: @layout-center;
 }
 
 .page-footer__paragraf {
@@ -68,33 +81,55 @@ footer {
 	color: @color-white;
 }	
 
+.footer {
+	flex-grow: 0;
+	flex-shrink: 0;
+	flex-basis: auto;
+}
+
 ///////////////////////////////////////
 //////// LOGIN //////////////////////
 //////////////////////////////////////
 
 .content {
 	min-height: calc(100vh - 80px);
+
+	// display: flex;
+	// justify-content: @layout-center;
+	
+	padding: @padding-body;
+	height: @height-header;
 	display: flex;
+<<<<<<< HEAD
 	flex-direction: column;
+=======
+	flex-direction: row;
+	justify-content: @layout-center;
+>>>>>>> master
 	align-items: center;
-	justify-content: center;
 }
 
 .content-form_center {
-	width: @width-form_center;
+	width: @width-form;
 	height: @height-form;
-	overflow: auto;
 }
 
-fieldset {
-	border-radius: 10%;
-	border-color: @color-border-radius;
+.div-authorization {
+	font-style: @font-italic;
 }
 
+.div-authorization-input {
+	display: flex;
+	flex-direction: row;
+	height: @line-height__form;
+	align-items: @layout-center;
+	justify-content: @layout-center;
+}
 
 ///////////////////////////////////////
 //////// INDEX //////////////////////
 //////////////////////////////////////
+<<<<<<< HEAD
 .task-ul{
 	margin: 20px;
 	background-color: @color-white;
@@ -136,6 +171,9 @@ fieldset {
 		color: white;
 	}
 	
+=======
+
+>>>>>>> master
 
 }
 .add-task{
