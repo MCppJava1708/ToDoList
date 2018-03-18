@@ -12,36 +12,39 @@ for (i = 0; i < myNodelist.length; i++) {
 // Удаление записи
 var close = document.getElementsByClassName("close");
 var i;
-for (i = 0; i < close.length; i++) {
-  close[i].onclick = function() {
+for (i = 0; i < close.length; i++) 
+{
+  close[i].onclick = function() 
+  {
     var div = this.parentElement;
-    div.style.display = "none";
+    div.style.display = "none";//заменить на удаление из БД
   }
 }
 
 // Добавьте символ «checked», когда вы нажимаете на элемент списка.
-var list = document.querySelector('ul');
+//var list = document.querySelector('ul');
+var list = getElementsByClassName('task-ul');
 list.addEventListener('click', function(ev) {
   if (ev.target.tagName === 'LI') {
-    ev.target.classList.toggle('checked');
+    ev.target.classList.toggle('checked');//заменить и/или добавить замену статуса в БД
   }
 }, false);
 
 // Создайте новый элемент списка, нажав кнопку «Добавить»
 function newElement() {
   var li = document.createElement("li");
-  var inputValue = document.getElementById("myInput").value;
+  var inputValue = document.getElementById("taskInput").value;
   var t = document.createTextNode(inputValue);
   li.appendChild(t);
   if (inputValue === '') {
     alert("You must write something!");
   } else {
-    document.getElementById("myUL").appendChild(li);
+    document.getElementById("task-ul").appendChild(li);
   }
-  document.getElementById("myInput").value = "";
+  document.getElementById("taskInput").value = "";
 
   var span = document.createElement("SPAN");
-  var txt = document.createTextNode("\u00D7");
+  var txt = document.createTextNode("  удалить");
   span.className = "close";
   span.appendChild(txt);
   li.appendChild(span);

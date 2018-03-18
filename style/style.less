@@ -1,5 +1,4 @@
 @import "variables.less";
-@import "mixin.less";
 
 html,body {
 	margin: @margin-body;
@@ -92,6 +91,7 @@ footer {
 //////// LOGIN //////////////////////
 //////////////////////////////////////
 
+<<<<<<< HEAD
 .contant-main {
 	min-height: calc(100vh - 80px);
 }
@@ -100,27 +100,30 @@ footer {
 	background-color: @color-main;
 }
 
+=======
+>>>>>>> Nikita
 .content-main-login {
 	width: @width-form;
 	padding: @padding-body;
 	margin: auto;
 }
+.content {
+	min-height: calc(100vh - 80px);
+	padding: @padding-body;
+	height: @height-header;
+	display: flex;
+	flex-direction: column;
+	justify-content: @layout-center;
+	align-items: center;
+}
 
 .content-form_center {
 	width: @width-form;
 	height: @height-form;
-	background-color: @color-form;
-}
-
-fieldset {
-	border-radius: @radius;
-	border-color: @color-border-radius;
-	background-color: @color-form;
 }
 
 .div-authorization {
-	.font-login(@color-auth, @font-tahoma, @font-size-tahoma,
-		@font-weight-tahoma);
+	font-style: @font-italic;
 }
 
 .div-authorization-input {
@@ -131,49 +134,10 @@ fieldset {
 	justify-content: @layout-center;
 }
 
-.content-input_size {
-	width: @width-input;
-	height: @height-input;
-}
-
-.input-border_style {
-	padding: @padding-input-login;
-	display: block;
-	border: none;
-	border-bottom: @border-w-login solid @color-authorization;
-	width: @width-input;
-}
-
-.div-lable {
-	height: @height-input;
-	line-height: @line-height__in-form;
-}
-
-.button-size {
-	width: @width-input;
-	height: @height-button; 
-}
-
-.buutton-color {
-	background-color: @color-button-sign-in;
-	color: @color-form;
-}
-.button-border_style {
-	border-radius: @radius-input;
-	border-width: @border-w-login;
-	border-color: @color-button-sign-in;
-}
-
-.auth-label {
-	text-align: @layout-center;
-	.font-login(@color-vanila, @font-verdana, @font-size-verdana, 
-		@font-weight-verdana);
-}
-
 ///////////////////////////////////////
 //////// INDEX //////////////////////
 //////////////////////////////////////
-.content {
+.content-task {
 	min-height: calc(100vh - 80px);
 	padding: @padding-body;
 	height: @height-header;
@@ -189,7 +153,9 @@ fieldset {
 	li {
 		float:none;
 		margin:10px;
+		font-size: 18px;
 	}
+	
 
 	li:hover {
 		background: green;
@@ -203,7 +169,7 @@ fieldset {
 	}
 	/* Добавьте знак «checked» при нажатии
 	(убрать лишние параметры) */
-	ul li.checked::before {
+	/*li.checked::before {
 		content: '';
 		position: absolute;
 		
@@ -214,7 +180,7 @@ fieldset {
 		transform: rotate(45deg);
 		height: 15px;
 		width: 7px;
-	}
+	}*/
 	.close {
 		margin: 10px;
 	}
@@ -231,19 +197,16 @@ fieldset {
 	input {
 		padding: 10px;
 		float: left;
+		
 	}
 	.addBtn {
 		padding: 10px;
-		
 		background: gray;
 		color: white;
 		float: left;
 		text-align: center;
 		font-size: 16px;
-		cursor: pointer;
-		transition: 0.3s;
 	}
-
 
 	.addBtn:hover {
 		background-color: green;
@@ -252,18 +215,6 @@ fieldset {
 
 
 
-///////////////////////////////////////
+//////////////////////////////////////
 //////// REGISTRARION ////////////////
 //////////////////////////////////////
-
-.elem {
-	display: flex;
-	flex-direction: row;
-	height: @height-elem-registration;
-	align-items: center;
-	justify-content: flex-start;
-}
-
-.lbl__elem {
-	width: @width-elem-registration;
-}
