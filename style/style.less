@@ -24,6 +24,7 @@ body {
 .navbar_img-logo {
 	padding-top: @padding-nav-img;
 	padding-left: @padding-nav-img;
+	padding-right: @padding-nav-img;
 }
 
 .img-logo {
@@ -32,25 +33,49 @@ body {
 }
 
 ul {
-    list-style-type: none;
-    margin: @margin-body;
-    padding: @padding-body;
-    overflow: hidden;
-    background-color: @color-black;
+	list-style-type: none;
+	margin: @margin-body;
+	padding: @padding-body;
+	overflow: hidden;
+	background-color: @color-black;
 }
 
 li {
-    float: left;
+	float: @layout-left;
 }
 
 li a {
-    display: block;
-    color: @color-white;
-    text-align: center;
-    padding: @padding__ToDoList;
-    text-decoration: none;
+	display: block;
+	color: @color-white;
+	text-align: center;
+	padding: @padding__ToDoList;
+	text-decoration: none;
 }
 
 li a:hover {
-    background-color: @color-black;
+	background-color: @color-black;
+}
+
+.active {
+	background-color: @color-active;
+}
+
+footer {
+	height: @height-nav; 
+	background-color: @color-black;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.page-footer__paragraf {
+	width: 150px;
+	text-align: left;
+	margin-right: 10px;
+	color: @color-white;
+}	
+
+.content {
+	min-height: calc(150vh - 80px);
 }
