@@ -74,47 +74,33 @@ footer {
 
 .content {
 	min-height: calc(100vh - 80px);
+
+	// display: flex;
+	// justify-content: @layout-center;
+	
+	padding: @padding-body;
+	height: @height-header;
 	display: flex;
-	align-items: @layout-center;
+	flex-direction: row;
 	justify-content: @layout-center;
+	align-items: center;
 }
 
 .content-form_center {
 	width: @width-form;
 	height: @height-form;
-	line-height: @line-height__form;
-	overflow: auto;
-}
-
-fieldset {
-	border-radius: @radius;
-	border-color: @color-border-radius;
 }
 
 .div-authorization {
 	font-style: @font-italic;
-	color: @color-active;
 }
 
 .div-authorization-input {
 	display: flex;
 	flex-direction: row;
+	height: @line-height__form;
 	align-items: @layout-center;
 	justify-content: @layout-center;
-}
-
-.content-input_width_height {
-	width: @width-input;
-	height: @height-input;
-}
-
-.input-border_style {
-	border-radius: @radius-input;
-}
-
-.div-lable {
-	height: @height-input;
-	line-height: @line-height__in-form;
 }
 
 ///////////////////////////////////////
