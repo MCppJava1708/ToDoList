@@ -1,5 +1,4 @@
 @import "variables.less";
-@import "mixin.less";
 
 html,body {
 	margin: @margin-body;
@@ -92,48 +91,28 @@ footer {
 //////// LOGIN //////////////////////
 //////////////////////////////////////
 
-<<<<<<< HEAD
 .content-main-login {
 	width: @width-form;
 	padding: @padding-body;
 	margin: auto;
 }
 .content {
-=======
-.contant-main {
->>>>>>> master
 	min-height: calc(100vh - 80px);
-}
-<<<<<<< HEAD
-
-=======
->>>>>>> ccbd6fa9778d775f542ca350e6cf88c1db757f2b
-
-.main_color {
-	background-color: @color-main;
-}
-
-.content-main-login {
-	width: @width-form;
 	padding: @padding-body;
-	margin: auto;
+	height: @height-header;
+	display: flex;
+	flex-direction: column;
+	justify-content: @layout-center;
+	align-items: center;
 }
 
 .content-form_center {
 	width: @width-form;
 	height: @height-form;
-	background-color: @color-form;
-}
-
-fieldset {
-	border-radius: @radius;
-	border-color: @color-border-radius;
-	background-color: @color-form;
 }
 
 .div-authorization {
-	.font-login(@color-auth, @font-tahoma, @font-size-tahoma,
-		@font-weight-tahoma);
+	font-style: @font-italic;
 }
 
 .div-authorization-input {
@@ -142,45 +121,6 @@ fieldset {
 	height: @line-height__form;
 	align-items: @layout-center;
 	justify-content: @layout-center;
-}
-
-.content-input_size {
-	width: @width-input;
-	height: @height-input;
-}
-
-.input-border_style {
-	padding: @padding-input-login;
-	display: block;
-	border: none;
-	border-bottom: @border-w-login solid @color-authorization;
-	width: @width-input;
-}
-
-.div-lable {
-	height: @height-input;
-	line-height: @line-height__in-form;
-}
-
-.button-size {
-	width: @width-input;
-	height: @height-button; 
-}
-
-.buutton-color {
-	background-color: @color-button-sign-in;
-	color: @color-form;
-}
-.button-border_style {
-	border-radius: @radius-input;
-	border-width: @border-w-login;
-	border-color: @color-button-sign-in;
-}
-
-.auth-label {
-	text-align: @layout-center;
-	.font-login(@color-vanila, @font-verdana, @font-size-verdana, 
-		@font-weight-verdana);
 }
 
 ///////////////////////////////////////
@@ -267,18 +207,3 @@ fieldset {
 //////////////////////////////////////
 //////// REGISTRARION ////////////////
 //////////////////////////////////////
-<<<<<<< HEAD
-=======
-
-.elem {
-	display: flex;
-	flex-direction: row;
-	height: @height-elem-registration;
-	align-items: center;
-	justify-content: flex-start;
-}
-
-.lbl__elem {
-	width: @width-elem-registration;
-}
->>>>>>> master
