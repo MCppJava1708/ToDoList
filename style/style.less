@@ -5,14 +5,6 @@ body {
 	height: @height-body;
 }
 
-.page-header {
-	height: @height-header;
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: @layout-center;
-}
-
 .navbar {
 	height: @height-nav;
 	background-color: @color-black;
@@ -76,6 +68,10 @@ footer {
 	color: @color-white;
 }	
 
+///////////////////////////////////////
+//////// LOGIN //////////////////////
+//////////////////////////////////////
+
 .content {
 	min-height: calc(100vh - 80px);
 	display: flex;
@@ -83,10 +79,13 @@ footer {
 	justify-content: center;
 }
 
-.conten-form_center {
+.content-form_center {
 	width: @width-form_center;
-	height: 250px;
+	height: @height-form;
 	overflow: auto;
-	flex-box: left;
 }
 
+fieldset {
+	border-radius: 10%;
+	border-color: @color-border-radius;
+}
