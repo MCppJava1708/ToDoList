@@ -17,11 +17,11 @@ for (i = 0; i < close.length; i++)
   close[i].onclick = function() 
   {
     var div = this.parentElement;
-    div.style.display = "none";//заменить на удаление из БД
+    div.style.display = "none";//отключение изображения div заменить на удаление из БД
   }
 }
 
-// Добавьте символ «checked», когда вы нажимаете на элемент списка.
+// Добавьте символ «checked», когда вы нажимаете на элемент списка(ставим слушатель).
 var list = document.getElementById("taskUl");
 list.addEventListener('click', function(ev) {
   if (ev.target.tagName === 'LI')  
@@ -36,7 +36,7 @@ list.addEventListener('click', function(ev) {
 
 
 // Создайте новый элемент списка, нажав кнопку «Добавить»
-function newElement() {
+document.getElementById("addBton").onclick = function newElement() {
 
   var li = document.createElement('li');
   var inputValue = document.getElementById("taskInput").value;
