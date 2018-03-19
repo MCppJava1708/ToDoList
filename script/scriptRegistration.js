@@ -8,6 +8,7 @@ var imgOK2     = document.getElementById('imgOK2');
 var imgCancel2 = document.getElementById('imgCancel2');
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 pass.onblur = function () {
 	strpass  = pass.value;
@@ -82,6 +83,14 @@ function passwordCheck (strpass, strpass2) {
 	else
 		return "OK";
 
+=======
+login.onblur = function {
+	alert ('Checking');
+}
+
+login.onfocus = function {
+	alert ('Checking');
+>>>>>>> 58daaeb6900809d4b91ba0fc5e11771c4e86e883
 =======
 login.onblur = function {
 	alert ('Checking');
