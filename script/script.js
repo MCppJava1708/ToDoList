@@ -18,7 +18,8 @@ for (i = 0; i < close.length; i++) {
     div.style.display = "none";//отключение изображения div заменить на удаление из БД
   }
 }
-
+  
+  //новая хрень
 // Добавьте символ «checked», когда вы нажимаете на элемент списка(ставим слушатель).
 var list = document.getElementById("taskUl");
     div.style.display = "none";
