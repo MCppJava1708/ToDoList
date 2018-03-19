@@ -173,13 +173,11 @@ fieldset {
 ///////////////////////////////////////
 //////// INDEX //////////////////////
 //////////////////////////////////////
-.content {
-	min-height: calc(100vh - 80px);
-	padding: @padding-body;
-	height: @height-header;
+.content-task{
+	min-height: calc(~"100vh - 120px");
 	display: flex;
 	flex-direction: column;
-	justify-content: @layout-center;
+	justify-content: center;
 	align-items: center;
 }
 
@@ -189,7 +187,9 @@ fieldset {
 	li {
 		float:none;
 		margin:10px;
+		font-size: 18px;
 	}
+	
 
 	li:hover {
 		background: green;
@@ -201,20 +201,7 @@ fieldset {
 		color: white;
 		text-decoration: line-through;
 	}
-	/* Добавьте знак «checked» при нажатии
-	(убрать лишние параметры) */
-	ul li.checked::before {
-		content: '';
-		position: absolute;
-		
-		border-style: solid;
-		border-width: 0 2px 2px 0;
-		top: 10px;
-		left: 16px;
-		transform: rotate(45deg);
-		height: 15px;
-		width: 7px;
-	}
+	
 	.close {
 		margin: 10px;
 	}
@@ -229,22 +216,19 @@ fieldset {
 }
 .add-task{
 	input {
+
 		padding: 12px;
-		padding: 10px;
 		float: left;
+		
 	}
 	.addBtn {
 		padding: 10px;
-		
 		background: gray;
 		color: white;
 		float: left;
 		text-align: center;
 		font-size: 16px;
-		cursor: pointer;
-		transition: 0.3s;
 	}
-
 
 	.addBtn:hover {
 		background-color: green;
