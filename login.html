@@ -22,25 +22,25 @@
 			<main class="content-main-login">
 				<h2 class="auth-label">ToDoList</h2>
 				<fieldset>
-					<div class="content-form_center">
+					<div id="divAuth" class="content-form_center">
 						<div class="div-authorization">
 							<div class="div-lable">
 								<label for="name">Username or email address</label>
 							</div>
 							<div class="div-authorization-input">
-								<input id="inputLogin" class="content-input_size input-border_style" type="text" placeholder="Enter yout user name or email address">
+								<input id="inputLogin" class="content-input_size input-border_style" type="text" placeholder="Enter yout user name or email address" required>
 							</div>
 							<div class="div-lable">
 								<label for="name">Password</label>
 							</div>
 							<div class="div-authorization-input" >
-								<input id="inputPassword" class="content-input_size input-border_style" placeholder="Enter yout password" type="text">
+								<input id="inputPassword" class="content-input_size input-border_style" placeholder="Enter yout password" type="password" required>
 							</div>
 							<div class="div-authorization-input">
 								<button id="btnSignIn" class="button-size button-border_style buutton-color">Sign in</button>
 							</div>
 							<div class="div-authorization-input">
-								 <a href="registration.html">Create new ToDoList acount</a>
+								<a href="registration.html">Create new ToDoList acount</a>
 							</div>
 						</div>
 					</div>
@@ -57,4 +57,15 @@
 		</div>
 	</div>
 </body>
+<script type="text/javascript" src="script/scriptLogin.js"></script>
+<style type="text/css">
+	.divErr {
+		margin-top: 20px;
+		display: flex;
+		flex-direction: row;
+		height: 30px;
+		align-items: center;
+		justify-content: center;
+	}
+</style>
 </html>
