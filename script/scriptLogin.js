@@ -56,7 +56,6 @@ function shapeError () {
 	node.style.borderRadius = 10 + 'px';
 	node.style.backgroundColor =  '#FF6570FF';
 	divError.appendChild(node);
-	nodeCheack = true;
 }
 
 ///////////////////////////////////////////
