@@ -1,4 +1,5 @@
 @import "variables.less";
+@import "mixin.less";
 
 html,body {
 	margin: @margin-body;
@@ -91,7 +92,6 @@ footer {
 //////// LOGIN //////////////////////
 //////////////////////////////////////
 
-
 .contant-main {
 	min-height: calc(100vh - 80px);
 }
@@ -100,29 +100,27 @@ footer {
 	background-color: @color-main;
 }
 
-
 .content-main-login {
 	width: @width-form;
 	padding: @padding-body;
 	margin: auto;
 }
-.content {
-	min-height: calc(100vh - 80px);
-	padding: @padding-body;
-	height: @height-header;
-	display: flex;
-	flex-direction: column;
-	justify-content: @layout-center;
-	align-items: center;
-}
 
 .content-form_center {
 	width: @width-form;
 	height: @height-form;
+	background-color: @color-form;
+}
+
+fieldset {
+	border-radius: @radius;
+	border-color: @color-border-radius;
+	background-color: @color-form;
 }
 
 .div-authorization {
-	font-style: @font-italic;
+	.font-login(@color-auth, @font-tahoma, @font-size-tahoma,
+		@font-weight-tahoma);
 }
 
 .div-authorization-input {
@@ -133,16 +131,53 @@ footer {
 	justify-content: @layout-center;
 }
 
+.content-input_size {
+	width: @width-input;
+	height: @height-input;
+}
+
+.input-border_style {
+	padding: @padding-input-login;
+	display: block;
+	border: none;
+	border-bottom: @border-w-login solid @color-authorization;
+	width: @width-input;
+}
+
+.div-lable {
+	height: @height-input;
+	line-height: @line-height__in-form;
+}
+
+.button-size {
+	width: @width-input;
+	height: @height-button; 
+}
+
+.buutton-color {
+	background-color: @color-button-sign-in;
+	color: @color-form;
+}
+.button-border_style {
+	border-radius: @radius-input;
+	border-width: @border-w-login;
+	border-color: @color-button-sign-in;
+}
+
+.auth-label {
+	text-align: @layout-center;
+	.font-login(@color-vanila, @font-verdana, @font-size-verdana, 
+		@font-weight-verdana);
+}
+
 ///////////////////////////////////////
 //////// INDEX //////////////////////
 //////////////////////////////////////
-.content-task {
-	min-height: calc(100vh - 80px);
-	padding: @padding-body;
-	height: @height-header;
+.content-task{
+	min-height: calc(~"100vh - 120px");
 	display: flex;
 	flex-direction: column;
-	justify-content: @layout-center;
+	justify-content: center;
 	align-items: center;
 }
 
@@ -166,20 +201,7 @@ footer {
 		color: white;
 		text-decoration: line-through;
 	}
-	/* Добавьте знак «checked» при нажатии
-	(убрать лишние параметры) */
-	/*li.checked::before {
-		content: '';
-		position: absolute;
-		
-		border-style: solid;
-		border-width: 0 2px 2px 0;
-		top: 10px;
-		left: 16px;
-		transform: rotate(45deg);
-		height: 15px;
-		width: 7px;
-	}*/
+	
 	.close {
 		margin: 10px;
 	}
@@ -194,7 +216,8 @@ footer {
 }
 .add-task{
 	input {
-		padding: 10px;
+
+		padding: 12px;
 		float: left;
 		
 	}
@@ -214,6 +237,70 @@ footer {
 
 
 
-//////////////////////////////////////
+///////////////////////////////////////
 //////// REGISTRARION ////////////////
 //////////////////////////////////////
+
+<<<<<<< HEAD
+.elem {	
+=======
+.elem {
+>>>>>>> 58daaeb6900809d4b91ba0fc5e11771c4e86e883
+	display: flex;
+	flex-direction: row;
+	height: @height-elem-registration;
+	align-items: center;
+	justify-content: flex-start;
+<<<<<<< HEAD
+
+	.lbl__elem {
+	width: @width-elem-registration;
+	}
+}
+
+.registration-fieldset {
+	border-radius: 13px;
+	border: 4px groove;
+}
+
+.registration-text {
+	font-family: Verdana;
+	font-style: italic;
+}
+
+.registration-tooltip {
+  border-bottom: 1px dotted #0077AA;
+  cursor: help;
+}
+
+.registration-tooltip::after {
+  background: black;
+  border-radius: 8px 8px 8px 0px;
+  box-shadow: 1px 1px 10px grey;
+  color: white;
+  content: attr(data-tooltip); /* содержимое всплывающей подсказки */
+  margin-top: -24px;
+  opacity: 0; /* элемент прозрачен... */
+  padding: 3px 7px;
+  position: absolute;
+  visibility: hidden; /*элемент скрыт */ 
+  
+}
+    
+.registration-tooltip:hover::after {
+  opacity: 1; /* показать элемент */
+  visibility: visible;
+}
+
+.registration-img {
+	height: 20px;
+	padding-left: 5px;
+	display: none;
+	visibility: false;
+=======
+}
+
+.lbl__elem {
+	width: @width-elem-registration;
+>>>>>>> 58daaeb6900809d4b91ba0fc5e11771c4e86e883
+}
