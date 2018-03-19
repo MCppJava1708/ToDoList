@@ -21,7 +21,6 @@ for (i = 0; i < close.length; i++)
   }
 }
 
-
 // Добавьте символ «checked», когда вы нажимаете на элемент списка(ставим слушатель).
 var list = document.getElementById("taskUl");
 list.addEventListener('click', function(ev) {
