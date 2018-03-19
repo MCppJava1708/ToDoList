@@ -22,7 +22,7 @@
 			<main class="content-main-login">
 				<h2 class="auth-label">ToDoList</h2>
 				<fieldset>
-					<div class="content-form_center">
+					<div id="divAuth" class="content-form_center">
 						<div class="div-authorization">
 							<div class="div-lable">
 								<label for="name">Username or email address</label>
@@ -40,7 +40,7 @@
 								<button id="btnSignIn" class="button-size button-border_style buutton-color">Sign in</button>
 							</div>
 							<div class="div-authorization-input">
-								 <a href="registration.html">Create new ToDoList acount</a>
+								<a href="registration.html">Create new ToDoList acount</a>
 							</div>
 						</div>
 					</div>
@@ -58,4 +58,14 @@
 	</div>
 </body>
 <script type="text/javascript" src="script/scriptLogin.js"></script>
+<style type="text/css">
+	.divErr {
+		margin-top: 20px;
+		display: flex;
+		flex-direction: row;
+		height: 30px;
+		align-items: center;
+		justify-content: center;
+	}
+</style>
 </html>
