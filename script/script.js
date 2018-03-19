@@ -22,24 +22,30 @@ for (i = 0; i < close.length; i++)
 }
 
 // Добавьте символ «checked», когда вы нажимаете на элемент списка.
-//var list = document.querySelector('ul');
-var list = getElementsByClassName('task-ul');
+var list = document.getElementById("taskUl");
 list.addEventListener('click', function(ev) {
-  if (ev.target.tagName === 'LI') {
-    ev.target.classList.toggle('checked');//заменить и/или добавить замену статуса в БД
+  if (ev.target.tagName === 'LI')  
+  {
+    ev.target.classList.toggle('checked');// добавить замену статуса в БД
   }
-}, false);
+});
+//target- проверяет каждый элемент списка на котором у нас висит лиснер
+/*Каждый HTML элемент содержит свойство classList, которое представляет
+ из себя объект,с доступнмы для обработки классами.*/
+//classList.toggle - преключить класс (добавить, если его нет, или удалить, если он есть)
+
 
 // Создайте новый элемент списка, нажав кнопку «Добавить»
 function newElement() {
-  var li = document.createElement("li");
+
+  var li = document.createElement('li');
   var inputValue = document.getElementById("taskInput").value;
   var t = document.createTextNode(inputValue);
   li.appendChild(t);
   if (inputValue === '') {
     alert("You must write something!");
   } else {
-    document.getElementById("task-ul").appendChild(li);
+    document.getElementById("taskUl").appendChild(li);
   }
   document.getElementById("taskInput").value = "";
 
@@ -49,8 +55,10 @@ function newElement() {
   span.appendChild(txt);
   li.appendChild(span);
 
-  for (i = 0; i < close.length; i++) {
-    close[i].onclick = function() {
+  for (i = 0; i < close.length; i++) 
+  {
+    close[i].onclick = function() 
+    {
       var div = this.parentElement;
       div.style.display = "none";
     }

@@ -136,14 +136,13 @@ footer {
 ///////////////////////////////////////
 //////// INDEX //////////////////////
 //////////////////////////////////////
-.content-task {
-	min-height: calc(100vh - 80px);
-	padding: @padding-body;
-	height: @height-header;
+.content-task{
+	min-height: calc(~"100vh - 120px");
 	display: flex;
 	flex-direction: column;
-	justify-content: @layout-center;
+	justify-content: center;
 	align-items: center;
+	
 }
 
 .task-ul{
@@ -166,20 +165,7 @@ footer {
 		color: white;
 		text-decoration: line-through;
 	}
-	/* Добавьте знак «checked» при нажатии
-	(убрать лишние параметры) */
-	/*li.checked::before {
-		content: '';
-		position: absolute;
-		
-		border-style: solid;
-		border-width: 0 2px 2px 0;
-		top: 10px;
-		left: 16px;
-		transform: rotate(45deg);
-		height: 15px;
-		width: 7px;
-	}*/
+	
 	.close {
 		margin: 10px;
 	}
@@ -194,6 +180,7 @@ footer {
 }
 .add-task{
 	input {
+
 		padding: 10px;
 		float: left;
 		
