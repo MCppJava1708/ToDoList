@@ -7,9 +7,6 @@ var imgCancel1 = document.getElementById('imgCancel1');
 var imgOK2     = document.getElementById('imgOK2');
 var imgCancel2 = document.getElementById('imgCancel2');
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-
 pass.onblur = function () {
 	strpass  = pass.value;
 	strpass2 = pass2.value;
@@ -27,7 +24,7 @@ pass.onblur = function () {
 		imgOK1.style.visible     = false;
 		imgCancel1.style.display = 'inline';
 		imgCancel1.style.visible = true;
-//		imgCancel2.data-tooltip  = "str";
+		imgCancel1.setAttribute('data-tooltip', str);
 	}
 };
 
@@ -48,7 +45,7 @@ pass2.onblur = function () {
 		imgOK2.style.visible     = false;
 		imgCancel2.style.display = 'inline';
 		imgCancel2.style.visible = true;
-//		imgCancel2.data-tooltip  = "str";
+		imgCancel2.setAttribute('data-tooltip', str);
 	}
 };
 
@@ -82,21 +79,4 @@ function passwordCheck (strpass, strpass2) {
 	}
 	else
 		return "OK";
-
-=======
-login.onblur = function {
-	alert ('Checking');
-}
-
-login.onfocus = function {
-	alert ('Checking');
->>>>>>> 58daaeb6900809d4b91ba0fc5e11771c4e86e883
-=======
-login.onblur = function {
-	alert ('Checking');
-}
-
-login.onfocus = function {
-	alert ('Checking');
->>>>>>> 58daaeb6900809d4b91ba0fc5e11771c4e86e883
-}
+};
