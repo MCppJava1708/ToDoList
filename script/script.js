@@ -83,7 +83,9 @@ document.getElementById("addBton").onclick = function newElement() {
 /////////// Object Task ///////////////////
 ///////////////////////////////////////////
 
-function Task (task, statusTask) {
+function Task (id, name, task, statusTask) {
+  this.id = id;
+  this.name = name;
   this.task = task;
   this.statusTask = statusTask;
 }
@@ -131,7 +133,7 @@ function conn() {
         break;
         case 3:
         statusTask = arrLine[i];
-        var task = new Task(task, statusTask);
+        var task = new Task(id, name, task, statusTask);
         tasks.push(task);
         count = 0;
         break;
