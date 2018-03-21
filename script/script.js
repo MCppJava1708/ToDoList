@@ -51,7 +51,6 @@ list.addEventListener('click', function(ev) {
 из себя объект,с доступнмы для обработки классами.*/
 //classList.toggle - преключить класс (добавить, если его нет, или удалить, если он есть)
 
-
 // Создайте новый элемент списка, нажав кнопку «Добавить»
 document.getElementById("addBton").onclick = function newElement() 
 {
