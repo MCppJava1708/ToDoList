@@ -170,6 +170,7 @@ fieldset {
 		@font-weight-verdana);
 }
 
+
 ///////////////////////////////////////
 //////// INDEX //////////////////////
 //////////////////////////////////////
@@ -248,3 +249,50 @@ fieldset {
 .lbl__elem {
 	width: @width-elem-registration;
 }
+
+
+.registration-fieldset {
+	border-radius: 13px;
+	border: 4px groove;
+}
+
+.registration-text {
+	font-family: Verdana;
+	font-style: italic;
+}
+
+.registration-tooltip {
+  border-bottom: 1px dotted #0077AA;
+  cursor: help;
+}
+
+.registration-tooltip::after {
+  background: black;
+  border-radius: 8px 8px 8px 0px;
+  box-shadow: 1px 1px 10px grey;
+  color: white;
+  content: attr(data-tooltip); /* содержимое всплывающей подсказки */
+  margin-top: -24px;
+  opacity: 0; /* элемент прозрачен... */
+  padding: 3px 7px;
+  position: absolute;
+  visibility: hidden; /*элемент скрыт */ 
+  
+}
+    
+.registration-tooltip:hover::after {
+  opacity: 1; /* показать элемент */
+  visibility: visible;
+}
+
+.registration-img {
+	height: 20px;
+	padding-left: 5px;
+	display: none;
+	visibility: false;
+}
+
+.lbl__elem {
+	width: @width-elem-registration;
+}
+

@@ -5,7 +5,6 @@
 	<title>Registration</title>
 	<link rel="stylesheet/less" href="style/style.less">
 	<script type="text/javascript" src="lib/less.min.js"></script>
-	<script type="text/javascript" src="script/scriptRegistration.js"></script> 
 </head>
 <body>
 	<div class = "wrap">
@@ -20,52 +19,61 @@
 					</ul>
 				</nav>
 			</header>
-			<main class="contant-main">
-				<div>
-				<h2>ToDoList</h2>
-				<form action="">
-					<fieldset>
-						<legend>Registration</legend>
-						<div class="elem">
-							<div class="lbl__elem">
-								<label for="login">login:</label>
+			<main>
+				<div class="content-main-login">
+					<h2>ToDoList</h2>
+					<form class="content-form_center" action="">
+						<fieldset class="registration-fieldset">
+							<legend class="registration-text">Registration</legend>
+							<div class="elem">
+								<div class="lbl__elem">
+									<label class="registration-tooltip" data-tooltip="Enter your name" for="login">login:</label>
+								</div>
+								<div>
+									<input id="login" type="text" placeholder="Enter your login" required>
+								</div>
 							</div>
+							<br>
+							<div class="elem">
+								<div class="lbl__elem">
+									<label class="registration-tooltip" data-tooltip="Enter your email" for="email">e-mail:</label>
+								</div>
+								<div>
+									<input id="email" type = "email" placeholder="Enter your e-mail" required>
+								</div>
+							</div>
+							<br>
+							<div class="elem">
+								<div class="lbl__elem">
+									<label class="registration-tooltip" data-tooltip="The length of password must be at least 8 symbols and it must include latin leters and numbers" for="pass">password: </label>
+								</div>
+								<div>							
+									<input id="pass" type="password" placeholder="Enter your password" required>
+								</div>
+								<div>
+									<img id="imgOK1" class="registration-img" src="images/correct.png" alt="">
+									<img id="imgCancel1" class="registration-img registration-tooltip" data-tooltip="a" src="images/incorrect.png" alt="">
+								</div>
+							</div>
+							<br>
+							<div class="elem">
+								<div class="lbl__elem">
+									<label class="registration-tooltip" data-tooltip="The length of password must be at least 8 symbols and it must include latin leters and numbers" for="pass2">password again:</label>
+								</div>
+								<div>
+									<input id="pass2" type = "password" placeholder="Repeat your password" required>
+								</div>
+								<div>
+									<img id="imgOK2" class="registration-img" src="images/correct.png" alt="">
+									<img id="imgCancel2" class="registration-img registration-tooltip" data-tooltip="a" src="images/incorrect.png" alt="">
+								</div>
+							</div>
+							<br>
 							<div>
-								<input id="login" type="text" placeholder="Enter your login" required>
+								<input type="submit" name="send" value="registration">
 							</div>
-						</div>
-						<div class="elem">
-							<div class="lbl__elem">
-								<label for="email">e-mail:</label>
-							</div>
-							<div>
-								<input id="email" type = "email" placeholder="Enter your e-mail" required>
-							</div>
-						</div>
-						<br>
-						<div class="elem">
-							<div class="lbl__elem">
-								<label for="pass">password: </label>
-							</div>
-							<div>							
-								<input id="pass" type="password" placeholder="Enter your password" required>
-							</div>
-						</div>
-						<br>
-						<div class="elem">
-							<div class="lbl__elem">
-								<label for="pass2">password again:</label>
-							</div>
-							<div>
-								<input id="pass2" type = "password" placeholder="Repeat your password" required>
-							</div>	
-						</div>
-						<br>
-						<div>
-							<input type="submit" name="send" value="registration">
-						</div>
-					</fieldset>
-				</form>
+						</fieldset>
+					</form>
 				</div>
 			</main>
 		</div>
@@ -78,5 +86,6 @@
 			</footer>
 		</div>
 	</div>
+	<script type="text/javascript" src="script/scriptRegistration.js"></script> 
 </body>
 </html>
