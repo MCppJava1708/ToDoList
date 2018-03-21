@@ -1,20 +1,5 @@
 var tasks = [];
 var xmlhttp = new XMLHttpRequest();
-
-readDB();
-function readDB(){
-  for(i = 0; i < tasks.length; i++)
-  {
-    var newLi = document.createElement('li');
-    newLi.innerHTML = tasks[i].task;
-    taskUl.appendChild(newLi);
-  }
-}
-
-// Создаем кнопку "close" и добавляем ее в <li>
-var myNodelist = document.getElementsByTagName("LI");
-var i;
-for (i = 0; i < myNodelist.length; i++) {
 var taskUl = document.getElementById('taskUl');
 var count = 1;
 
@@ -35,7 +20,6 @@ function createTask(task){
   span.appendChild(txt);
   newLi.appendChild(span);
 }
-
 
 // Удаление записи
 var close = document.getElementsByClassName("close");
@@ -130,22 +114,11 @@ function conn()
   } else {
 
     line = xmlhttp.responseText;
-    var arrLine=[];
-    arrLine = line.split(" ");
-    var count = 0;
-    var id;
-    var name;
-    var task;
-    var statusTask;
-
-
-    line = xmlhttp.responseText;
 
     var arrLine=[];
     arrLine = line.split(" ");
     var count = 0;
        
->>>>>>> Nikita
     for (var i = 0; i < arrLine.length; i++) {
       switch (count) {
         case 0:
@@ -164,22 +137,15 @@ function conn()
         statusTask = arrLine[i];
         var task = new Task(id, name, task, statusTask);
         tasks.push(task);
-<<<<<<< HEAD
-=======
         createTask(task);
         console.log(task);
->>>>>>> Nikita
         count = 0;
         break;
       }
     }
   }
-<<<<<<< HEAD
-}
-=======
 }
 
 ///////////////////////////////////////////
 /////////// Server Read Task /////////////
 ///////////////////////////////////////////
->>>>>>> Nikita
