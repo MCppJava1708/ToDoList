@@ -1,6 +1,5 @@
 var tasks = [];
 var xmlhttp = new XMLHttpRequest();
-<<<<<<< HEAD
 
 readDB();
 function readDB(){
@@ -16,7 +15,6 @@ function readDB(){
 var myNodelist = document.getElementsByTagName("LI");
 var i;
 for (i = 0; i < myNodelist.length; i++) {
-=======
 var taskUl = document.getElementById('taskUl');
 var count = 1;
 
@@ -31,7 +29,6 @@ function createTask(task){
   taskUl.appendChild(newLi);
 
   //Создаем кнопку "close" и добавляем ее в <li>
->>>>>>> Nikita
   var span = document.createElement("SPAN");
   var txt = document.createTextNode("  удалить");
   span.className = "close";
@@ -114,34 +111,24 @@ function Task (id, name, task, statusTask) {
 /////////// Server Read Task /////////////
 ///////////////////////////////////////////
 
-<<<<<<< HEAD
-readPHPCon();
-
-function readPHPCon() {
-=======
 readDb();
 
 function readDb() 
 {
->>>>>>> Nikita
   xmlhttp.onreadystatechange = conn;
   xmlhttp.open("GET", "php/readTask.php", true);
   xmlhttp.send();
 }
 
-<<<<<<< HEAD
-function conn() {
-=======
 function conn() 
 {
->>>>>>> Nikita
   var line;
   if (xmlhttp.readyState != 4) return;
 
   if (xmlhttp.status != 200) {
     console.log(xmlhttp.status + ': ' + xmlhttp.statusText);
   } else {
-<<<<<<< HEAD
+
     line = xmlhttp.responseText;
     var arrLine=[];
     arrLine = line.split(" ");
@@ -150,7 +137,7 @@ function conn()
     var name;
     var task;
     var statusTask;
-=======
+
 
     line = xmlhttp.responseText;
 
