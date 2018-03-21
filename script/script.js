@@ -1,5 +1,6 @@
 var tasks = [];
 var xmlhttp = new XMLHttpRequest();
+<<<<<<< HEAD
 
 readDB();
 function readDB(){
@@ -15,11 +16,27 @@ function readDB(){
 var myNodelist = document.getElementsByTagName("LI");
 var i;
 for (i = 0; i < myNodelist.length; i++) {
+=======
+var taskUl = document.getElementById('taskUl');
+var count = 1;
+
+var id;
+var name = "Nikita";
+var task = document.getElementById('taskInput');
+var statusTask = true;
+
+function createTask(task){
+  var newLi = document.createElement('li');  
+  newLi.innerHTML = task.task ;
+  taskUl.appendChild(newLi);
+
+  //Создаем кнопку "close" и добавляем ее в <li>
+>>>>>>> Nikita
   var span = document.createElement("SPAN");
   var txt = document.createTextNode("  удалить");
   span.className = "close";
   span.appendChild(txt);
-  myNodelist[i].appendChild(span);
+  newLi.appendChild(span);
 }
 
 
@@ -30,8 +47,13 @@ for (i = 0; i < close.length; i++)
 {
   close[i].onclick = function() 
   {
+    createTask(tasks[0]);
+    /*console.log(name);
     var div = this.parentElement;
+    task = div.textContent;
+    console.log(task);
     div.style.display = "none";//отключение изображения div заменить на удаление из БД
+  */
   }
 }
 
@@ -48,33 +70,31 @@ list.addEventListener('click', function(ev) {
 из себя объект,с доступнмы для обработки классами.*/
 //classList.toggle - преключить класс (добавить, если его нет, или удалить, если он есть)
 
-
 // Создайте новый элемент списка, нажав кнопку «Добавить»
-document.getElementById("addBton").onclick = function newElement() {
+document.getElementById("addBton").onclick = function newElement() 
+{
 
-  var li = document.createElement('li');
-  var inputValue = document.getElementById("taskInput").value;
-  var t = document.createTextNode(inputValue);
-  li.appendChild(t);
-  if (inputValue === '') {
-    alert("You must write something!");
-  } else {
-    document.getElementById("taskUl").appendChild(li);
-  }
-  document.getElementById("taskInput").value = "";
+  xmlhttp.onreadystatechange = conn;
+  str = "'"+ name + "','"+ task.value + "'," + statusTask;
+  console.log(str);
+  xmlhttp.open("GET", "php/createTask.php?&str="+str, true);
+  xmlhttp.send();
 
-  var span = document.createElement("SPAN");
-  var txt = document.createTextNode("  удалить");
-  span.className = "close";
-  span.appendChild(txt);
-  li.appendChild(span);
 
-  for (i = 0; i < close.length; i++) 
-  {
-    close[i].onclick = function() 
+  function conn() 
+
+  { 
+
+    if (xmlhttp.readyState != 4) return;
+
+    if (xmlhttp.status != 200) 
     {
-      var div = this.parentElement;
-      div.style.display = "none";
+      alert(xhr.status + ': ' + xhr.statusText);
+    } 
+    else 
+    {
+      var line = xmlhttp.responseText;
+      alert(line)
     }
   }
 }
@@ -94,21 +114,34 @@ function Task (id, name, task, statusTask) {
 /////////// Server Read Task /////////////
 ///////////////////////////////////////////
 
+<<<<<<< HEAD
 readPHPCon();
 
 function readPHPCon() {
+=======
+readDb();
+
+function readDb() 
+{
+>>>>>>> Nikita
   xmlhttp.onreadystatechange = conn;
   xmlhttp.open("GET", "php/readTask.php", true);
   xmlhttp.send();
 }
 
+<<<<<<< HEAD
 function conn() {
+=======
+function conn() 
+{
+>>>>>>> Nikita
   var line;
   if (xmlhttp.readyState != 4) return;
 
   if (xmlhttp.status != 200) {
     console.log(xmlhttp.status + ': ' + xmlhttp.statusText);
   } else {
+<<<<<<< HEAD
     line = xmlhttp.responseText;
     var arrLine=[];
     arrLine = line.split(" ");
@@ -117,6 +150,15 @@ function conn() {
     var name;
     var task;
     var statusTask;
+=======
+
+    line = xmlhttp.responseText;
+
+    var arrLine=[];
+    arrLine = line.split(" ");
+    var count = 0;
+       
+>>>>>>> Nikita
     for (var i = 0; i < arrLine.length; i++) {
       switch (count) {
         case 0:
@@ -135,9 +177,22 @@ function conn() {
         statusTask = arrLine[i];
         var task = new Task(id, name, task, statusTask);
         tasks.push(task);
+<<<<<<< HEAD
+=======
+        createTask(task);
+        console.log(task);
+>>>>>>> Nikita
         count = 0;
         break;
       }
     }
   }
+<<<<<<< HEAD
 }
+=======
+}
+
+///////////////////////////////////////////
+/////////// Server Read Task /////////////
+///////////////////////////////////////////
+>>>>>>> Nikita
