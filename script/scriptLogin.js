@@ -5,7 +5,7 @@ var userNameOrEmail = "";
 var password = "";
 var count = 1;
 var node;
-var l;
+var lgn;
 
 ///////////////////////////////////////////
 /////////// Object Login //////////////////
@@ -25,8 +25,17 @@ Login.prototype.cheackUser = function(users) {
 	doc.location.href = "index.html";
 }
 else {
-	shapeError ();
+	shapeError();
 }
+}
+
+Login.prototype.loginRex = function(){
+	 if (this.userNameOrEmail.search(/^[a-zA-Z0-9_-]{3,16}$/) !=-1 &&
+	 	this.password.search(/^[a-z0-9_-]{6,18}$/) !=-1) {
+	 		readPHPCon(lgn.userNameOrEmail);
+	 } else {
+	 		alert("Inncorect Login or password");
+	 }
 }
 
 ///////////////////////////////////////////
@@ -45,7 +54,7 @@ function User (id, login, email, password) {
 ///////////////////////////////////////////
 
 function shapeError () {
-	node = document.createElement('div');
+	node = doc.createElement('div');
 	node.className = "divErr";
 	node.innerHTML = "Incorrect username or password.";
 	node.position = 'absolute';
@@ -61,7 +70,6 @@ function shapeError () {
 ///////////////////////////////////////////
 
 function readPHPCon(login) {
-	console.log(login);
 	xmlhttp.onreadystatechange = conn;
 	xmlhttp.open("GET", "php/readLogin.php?name=" + login, true);
 	xmlhttp.send();
@@ -77,7 +85,7 @@ function conn() {
 		line = xmlhttp.responseText;
 		console.log(line);
 		if (line === "") {
-			l.cheackUser(line);
+			lgn.cheackUser(line);
 		} else {
 			var arrLine=[];
 			arrLine = line.split(" ");
@@ -103,7 +111,7 @@ function conn() {
 					case 3:
 					pass = arrLine[i];
 					var user = new User(id, login, email, pass);
-					l.cheackUser(user);
+					lgn.cheackUser(user);
 					count = 0;
 					break;
 				}
@@ -117,8 +125,8 @@ function conn() {
 ///////////////////////////////////////////
 
 doc.getElementById("btnSignIn").onclick = function () {
-	l = new Login(userNameOrEmail, password);
-	readPHPCon(l.userNameOrEmail);
+	lgn = new Login(userNameOrEmail, password);
+	lgn.loginRex();
 	if (count > 1) {
 		divError.removeChild(node);
 	} 
