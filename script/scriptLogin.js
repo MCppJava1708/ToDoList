@@ -19,9 +19,11 @@ function Login (userNameOrEmail, password) {
 Login.prototype.cheackUser = function(users) {
 	if (users.login === this.userNameOrEmail &&
 		users.password === this.password) {
+		sendTask (users.login);
 		doc.location.href = "index.html";
 } else if (users.email === this.userNameOrEmail &&
 	users.password === this.password) {
+	sendTask (users.email);
 	doc.location.href = "index.html";
 }
 else {
@@ -34,7 +36,8 @@ Login.prototype.loginRex = function(){
 	 	this.password.search(/^[a-z0-9_-]{6,18}$/) !=-1) {
 	 		readPHPCon(lgn.userNameOrEmail);
 	 } else {
-	 		alert("Inncorect Login or password");
+	 		count = 0;
+	 		shapeError();
 	 }
 }
 
@@ -118,6 +121,13 @@ function conn() {
 			}
 		}
 	}
+}
+
+function sendTask (nameOrEml) {
+	var http = new XMLHttpRequest();
+	//http.onreadystatechange = conn;
+	http.open("GET", "php/readLogin.php?name=" + nameOrEml, true);
+	http.send();
 }
 
 ///////////////////////////////////////////
