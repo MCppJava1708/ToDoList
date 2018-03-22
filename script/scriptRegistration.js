@@ -1,18 +1,34 @@
-var login      = document.getElementById('login');
-var email      = document.getElementById('email');
-var pass       = document.getElementById('pass');
-var pass2      = document.getElementById('pass2');
-var imgOK1     = document.getElementById('imgOK1');
-var imgCancel1 = document.getElementById('imgCancel1');
-var imgOK2     = document.getElementById('imgOK2');
-var imgCancel2 = document.getElementById('imgCancel2');
-var pass2Error = document.getElementById('pass2Error');
+var pass         = document.getElementById('pass');
+var pass2        = document.getElementById('pass2');
+var imgPassOK1   = document.getElementById('imgPassOK1');
+var imgPassFail1 = document.getElementById('imgPassFail1');
+var imgPassOK2   = document.getElementById('imgPassOK2');
+var imgPassFail2 = document.getElementById('imgPassFail2');
+var pass2Error   = document.getElementById('pass2Error');
 var xhr = new XMLHttpRequest();
 
 login.onblur = function () 
 {
+	var login = document.getElementById('login');
+	if (login.value == "")
+		return;
+
 	xhr.onreadystatechange = receive;
 	var send = "&login=" + login.value;
+	xhr.onreadystatechange = receive;
+	xhr.open ('POST', "php/registerCheck.php", true);
+	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	xhr.send(send);	
+}
+
+email.onblur = function ()
+{
+	var email = document.getElementById('email');
+	if (email.value == "")
+		return;
+
+	xhr.onreadystatechange = receive;
+	var send = "&email=" + email.value;
 	xhr.onreadystatechange = receive;
 	xhr.open ('POST', "php/registerCheck.php", true);
 	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -25,19 +41,9 @@ pass.onblur = function ()
 	strpass2 = pass2.value;
 	str = passwordCheck (strpass, strpass2);
 	if (str == true)
-	{
-		imgCancel1.style.display = 'none';
-		imgCancel1.style.visible = false;
-		imgOK1.style.display     = 'inline';
-		imgOK1.style.visible     = true;
-	}
+		styleCorrection (imgPassFail1, imgPassOK1);	
 	else
-	{
-		imgOK1.style.display     = 'none';
-		imgOK1.style.visible     = false;
-		imgCancel1.style.display = 'inline';
-		imgCancel1.style.visible = true;
-	}
+		styleCorrection (imgPassOK1, imgPassFail1);
 };
 
 pass2.onblur = function () {
@@ -45,19 +51,9 @@ pass2.onblur = function () {
 	strpass2 = pass2.value;
 	str = passwordCheck (strpass2, strpass);
 	if (str == true)
-	{
-		imgCancel2.style.display = 'none';
-		imgCancel2.style.visible = false;
-		imgOK2.style.display     = 'inline';
-		imgOK2.style.visible     = true;
-	}
+		styleCorrection (imgPassFail2, imgPassOK2);
 	else
-	{
-		imgOK2.style.display     = 'none';
-		imgOK2.style.visible     = false;
-		imgCancel2.style.display = 'inline';
-		imgCancel2.style.visible = true;
-	}
+		styleCorrection (imgPassOK2, imgPassFail2);
 };
 
 function passwordCheck (strpass, strpass2) {
@@ -86,23 +82,29 @@ function receive ()
 	} 
 	else 
 	{
+		var imgLoginOk   = document.getElementById('imgLoginOk');
+		var imgLoginFail = document.getElementById('imgLoginFail');
+		var imgEmailOk   = document.getElementById('imgEmailOk');
+		var imgEmailFail = document.getElementById('imgEmailFail');
 		var res = xhr.responseText;
 		alert (res);
 		if (res == 0) 
-		{
-			imgCancel1.style.display = 'none';
-			imgCancel1.style.visible = false;
-			imgOK1.style.display     = 'inline';
-			imgOK1.style.visible     = true;
-		} 
+			styleCorrection (imgLoginFail, imgLoginOk);
 		else if (res == 1)
-		{
-			imgOK1.style.display     = 'none';
-			imgOK1.style.visible     = false;
-			imgCancel1.style.display = 'inline';
-			imgCancel1.style.visible = true;
-		}
+			styleCorrection (imgLoginOk, imgLoginFail);
+		else if (res == 2)
+			styleCorrection (imgEmailFail, imgEmailOk);
+		else if (res == 3)
+			styleCorrection (imgEmailOk, imgEmailFail);
 		else
 			alert ("Reqest error");
 	}
+}
+
+function styleCorrection (hidd, show)
+{
+	hidd.style.display = 'none';
+	hidd.style.visible = false;
+	show.style.display = 'inline';
+	show.style.visible = true;
 }
