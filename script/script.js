@@ -25,9 +25,9 @@ function createTask(task){
 var close = document.getElementsByClassName("close");
 var i;
 close.onclick = function() 
-  {
-    console.log(name);
-  }
+{
+  console.log(name);
+}
 
 /*
 for (i = 0; i < close.length; i++) 
@@ -101,12 +101,12 @@ function Task (id, name, task, statusTask) {
 /////////// Server Read Task /////////////
 ///////////////////////////////////////////
 
-readDb();
 
-function readDb() 
+
+function readDb(login) 
 {
   xmlhttp.onreadystatechange = conn;
-  //xmlhttp.open("GET", "php/readTask.php", true);
+  xmlhttp.open("GET", "php/readTask.php?name=" + login, true);
   xmlhttp.send();
 }
 
@@ -124,7 +124,7 @@ function conn()
     var arrLine=[];
     arrLine = line.split(" ");
     var count = 0;
-       
+
     for (var i = 0; i < arrLine.length; i++) {
       switch (count) {
         case 0:
@@ -155,3 +155,10 @@ function conn()
 ///////////////////////////////////////////
 /////////// Server Read Task /////////////
 ///////////////////////////////////////////
+
+OnLoad();
+function OnLoad() {
+  var paramValue = window.location.href.split("?")[1].split("=")[1];
+  console.log(paramValue);
+  readDb(paramValue);
+}

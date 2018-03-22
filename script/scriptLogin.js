@@ -20,7 +20,7 @@ Login.prototype.cheackUser = function(users) {
 	if (users.login === this.userNameOrEmail &&
 		users.password === this.password) {
 		sendTask (users.login);
-		doc.location.href = "index.html";
+		doc.location.href = "index.html?login=" + users.login;
 } else if (users.email === this.userNameOrEmail &&
 	users.password === this.password) {
 	sendTask (users.email);
