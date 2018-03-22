@@ -19,12 +19,10 @@ function Login (userNameOrEmail, password) {
 Login.prototype.cheackUser = function(users) {
 	if (users.login === this.userNameOrEmail &&
 		users.password === this.password) {
-		sendTask (users.login);
 		doc.location.href = "index.html?login=" + users.login;
 } else if (users.email === this.userNameOrEmail &&
 	users.password === this.password) {
-	sendTask (users.email);
-	doc.location.href = "index.html";
+	doc.location.href = "index.html?login="+ users.login;
 }
 else {
 	shapeError();
@@ -35,7 +33,11 @@ Login.prototype.loginRex = function(){
 	 if (this.userNameOrEmail.search(/^[a-zA-Z0-9_-]{3,16}$/) !=-1 &&
 	 	this.password.search(/^[a-z0-9_-]{6,18}$/) !=-1) {
 	 		readPHPCon(lgn.userNameOrEmail);
-	 } else {
+	 } else if (this.userNameOrEmail.search( /^([a-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z\.]{2,6})$/) !=-1 &&
+	 	this.password.search(/^[a-z0-9_-]{6,18}$/) !=-1) {
+	 	
+	 }
+	  else {
 	 		count = 0;
 	 		shapeError();
 	 }
@@ -121,14 +123,6 @@ function conn() {
 			}
 		}
 	}
-}
-
-function sendTask (nameOrEml) {
-	var http = new XMLHttpRequest();
-	alert(nameOrEml);
-	//http.onreadystatechange = conn;
-	http.open("GET", "php/readTask.php?name=" + nameOrEml, true);
-	http.send();
 }
 
 ///////////////////////////////////////////
