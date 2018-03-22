@@ -106,7 +106,7 @@ readDb();
 function readDb() 
 {
   xmlhttp.onreadystatechange = conn;
-  xmlhttp.open("GET", "php/readTask.php", true);
+  //xmlhttp.open("GET", "php/readTask.php", true);
   xmlhttp.send();
 }
 

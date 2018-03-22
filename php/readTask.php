@@ -1,4 +1,5 @@
 <?php
+$name = $_GET['name'];
 $host='localhost';
 $database='todolistdb';
 $user='root';
@@ -6,7 +7,7 @@ $password='';
 $link = mysqli_connect($host, $user, $password, $database) 
 or die("Ошибка " . mysqli_error($link));
 mysqli_set_charset($link, 'utf8');
-$query ="SELECT * FROM task";
+$query ="SELECT * FROM task WHERE name ='".$name."'";
 $result = mysqli_query($link, $query) or die("Ошибка " . mysqli_error($link)); 
 if($result)
 {

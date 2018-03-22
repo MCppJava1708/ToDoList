@@ -125,8 +125,9 @@ function conn() {
 
 function sendTask (nameOrEml) {
 	var http = new XMLHttpRequest();
+	alert(nameOrEml);
 	//http.onreadystatechange = conn;
-	http.open("GET", "php/readLogin.php?name=" + nameOrEml, true);
+	http.open("GET", "php/readTask.php?name=" + nameOrEml, true);
 	http.send();
 }
 
