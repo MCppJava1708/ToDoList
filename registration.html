@@ -22,7 +22,7 @@
 			<main>
 				<div class="content-main-login">
 					<h2>ToDoList</h2>
-					<form class="content-form_center" action="">
+					<form class="content-form_center" action="php/register.php" method="POST">
 						<fieldset class="registration-fieldset">
 							<legend class="registration-text">Registration</legend>
 							<div class="elem">
@@ -32,6 +32,10 @@
 								<div>
 									<input id="login" type="text" placeholder="Enter your login" required>
 								</div>
+								<div>
+									<img id="imgLoginOk" class="registration-img" src="images/correct.png">
+									<img id="imgLoginFail" class="registration-img" data-tooltip="a" src="images/incorrect.png">
+								</div>
 							</div>
 							<br>
 							<div class="elem">
@@ -40,6 +44,10 @@
 								</div>
 								<div>
 									<input id="email" type = "email" placeholder="Enter your e-mail" required>
+								</div>
+								<div>
+									<img id="imgEmailOk" class="registration-img" src="images/correct.png">
+									<img id="imgEmailFail" class="registration-img" data-tooltip="a" src="images/incorrect.png">
 								</div>
 							</div>
 							<br>
@@ -51,8 +59,8 @@
 									<input id="pass" type="password" placeholder="Enter your password" required>
 								</div>
 								<div>
-									<img id="imgOK1" class="registration-img" src="images/correct.png">
-									<img id="imgCancel1" class="registration-img" data-tooltip="a" src="images/incorrect.png">
+									<img id="imgPassOK1" class="registration-img" src="images/correct.png">
+									<img id="imgPassFail1" class="registration-img" data-tooltip="a" src="images/incorrect.png">
 								</div>
 							</div>
 							<br>
@@ -64,8 +72,8 @@
 									<input id="pass2" type = "password" placeholder="Repeat your password" required>
 								</div>
 								<div>
-									<img id="imgOK2" class="registration-img" src="images/correct.png">
-									<img id="imgCancel2" class="registration-img" src="images/incorrect.png">
+									<img id="imgPassOK2" class="registration-img" src="images/correct.png">
+									<img id="imgPassFail2" class="registration-img" src="images/incorrect.png">
 									<div id="pass2Error" class="registration-error"></div>
 								</div>
 							</div>
