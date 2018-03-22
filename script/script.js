@@ -24,20 +24,26 @@ function createTask(task){
 // Удаление записи
 var close = document.getElementsByClassName("close");
 var i;
+close.onclick = function() 
+  {
+    console.log(name);
+  }
+
+/*
 for (i = 0; i < close.length; i++) 
 {
   close[i].onclick = function() 
   {
     createTask(tasks[0]);
-    /*console.log(name);
+    console.log(name);
     var div = this.parentElement;
     task = div.textContent;
     console.log(task);
-    div.style.display = "none";//отключение изображения div заменить на удаление из БД
-  */
+    div.style.display = "none";
+    //отключение изображения div заменить на удаление из БД
   }
 }
-
+*/
 // Добавьте символ «checked», когда вы нажимаете на элемент списка(ставим слушатель).
 var list = document.getElementById("taskUl");
 list.addEventListener('click', function(ev) {

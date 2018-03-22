@@ -1,6 +1,6 @@
 <?php
 $host='localhost';
-$database='todolist';
+$database='todolistdb';
 $user='root';
 $password='';
 $link = mysqli_connect($host, $user, $password, $database) 
