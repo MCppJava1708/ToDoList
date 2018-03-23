@@ -297,8 +297,13 @@ fieldset {
 }
 
 .registration-error {
-	background-color: red;
- 	color: white;
- 	display: none;
-	visibility: false;
+	color: #FFFFFFFF;
+	border-radius: 10px;
+	background-color: #FF6570FF;
+	text-align: center;
+}
+
+.buutton-color:disabled {
+	background-color: lighten(@color-button-sign-in, 40%);
+	color: darken(@color-form, 50%);
 }
