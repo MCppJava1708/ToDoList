@@ -21,8 +21,8 @@
 			</header>
 			<main>
 				<div class="content-main-login">
-					<h2>ToDoList</h2>
-					<form class="content-form_center" action="php/register.php" method="POST">
+					<h2 class="auth-label">ToDoList</h2>
+					<div class="content-form_center">
 						<fieldset class="registration-fieldset">
 							<legend class="registration-text">Registration</legend>
 							<div class="elem">
@@ -74,15 +74,19 @@
 								<div>
 									<img id="imgPassOK2" class="registration-img" src="images/correct.png">
 									<img id="imgPassFail2" class="registration-img" src="images/incorrect.png">
-									<div id="pass2Error" class="registration-error"></div>
 								</div>
 							</div>
 							<br>
 							<div>
-								<input type="submit" name="send" value="registration">
+								<input type="button" id="btnsend" class="button-size button-border_style buutton-color" name="send" value="registration" disabled="true">
 							</div>
 						</fieldset>
-					</form>
+						<br>
+						<div id="loginError" class="registration-error"></div>
+						<div id="emailError" class="registration-error"></div>
+						<div id="passError"  class="registration-error"></div>
+						<div id="pass2Error" class="registration-error"></div>
+					</div>
 				</div>
 			</main>
 		</div>
