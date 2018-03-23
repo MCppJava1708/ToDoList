@@ -66,6 +66,16 @@ li a:hover {
 	background-color: @color-active;
 }
 
+.div-login {
+  margin-left: auto;
+  margin-right: @margin-login;
+}
+.a-login {
+	text-decoration: none;
+	.font-login(@color-form, @font-tahoma, @font-size-tahoma,
+		@font-weight-tahoma)
+}
+
 footer {
 	height: @height-nav; 
 	background-color: @color-black;
@@ -262,27 +272,27 @@ fieldset {
 }
 
 .registration-tooltip {
-  border-bottom: 1px dotted #0077AA;
-  cursor: help;
+	border-bottom: 1px dotted #0077AA;
+	cursor: help;
 }
 
 .registration-tooltip::after {
-  background: black;
-  border-radius: 8px 8px 8px 0px;
-  box-shadow: 1px 1px 10px grey;
-  color: white;
-  content: attr(data-tooltip); /* содержимое всплывающей подсказки */
-  margin-top: -24px;
-  opacity: 0; /* элемент прозрачен... */
-  padding: 3px 7px;
-  position: absolute;
-  visibility: hidden; /*элемент скрыт */ 
-  
+	background: black;
+	border-radius: 8px 8px 8px 0px;
+	box-shadow: 1px 1px 10px grey;
+	color: white;
+	content: attr(data-tooltip); /* содержимое всплывающей подсказки */
+	margin-top: -24px;
+	opacity: 0; /* элемент прозрачен... */
+	padding: 3px 7px;
+	position: absolute;
+	visibility: hidden; /*элемент скрыт */ 
+
 }
-    
+
 .registration-tooltip:hover::after {
-  opacity: 1; /* показать элемент */
-  visibility: visible;
+	opacity: 1; /* показать элемент */
+	visibility: visible;
 }
 
 .registration-img {
@@ -298,7 +308,7 @@ fieldset {
 
 .registration-error {
 	background-color: red;
- 	color: white;
- 	display: none;
+	color: white;
+	display: none;
 	visibility: false;
 }
