@@ -17,11 +17,16 @@ function createTask(task){
   var text = task.task ;
   var t = document.createTextNode(text);
   newLi.appendChild(t);
+  
+  if(task.statusTask == 0)
+  {
+    newLi.classList.add('checked')
+  }
   taskUl.appendChild(newLi);
 
   //Создаем кнопку "close" и добавляем ее в <li>
   var span = document.createElement("SPAN");
-  var txt = document.createTextNode("  delete");
+  var txt = document.createTextNode(" \u00D7");
   span.className = "close";
   span.appendChild(txt);
   newLi.appendChild(span);
@@ -33,17 +38,21 @@ function createTask(task){
 /////////////////////////////////////////////////////////
 
 var list = document.getElementById("taskUl");
-list.addEventListener('click', function(ev) {
+list.addEventListener('click', function(ev) 
+{
   if (ev.target.tagName === 'LI')  
   {
-    ev.target.classList.toggle('checked');// добавить замену статуса в БД
-    alert(ev.target.innerText);
+    //ev.target.classList.toggle('checked');
+    var str = ev.target.parentElement.innerText;
+    task = str.substring(0,str.indexOf(" "));
+    UpdateStatusTaskInDB(task);
   }
-  else if (ev.target.className === "close"){
+  /*else if (ev.target.className === "close")
+  {
     var str = ev.target.parentElement.innerText;
     task = str.substring(0,str.indexOf(" "));
     dellFromDbTask(task);
-  }
+  }*/
 });
 //target- проверяет каждый элемент списка на котором у нас висит лиснер
 /*Каждый HTML элемент содержит свойство classList, которое представляет
@@ -72,19 +81,19 @@ document.getElementById("addBton").onclick = function newElement()
     else 
     {
       var line = xmlhttp.responseText;
-      alert(line)
+      //alert(line)
     }
   }
 }
 
 /////////////////////////////////////////////////////////
-// удалить таск
+// Взять statusTask из BD
 /////////////////////////////////////////////////////////
 
-function dellFromDbTask(task) 
+function UpdateStatusTaskInDB(task) 
 {
   xmlhttp.onreadystatechange = conn;
-  xmlhttp.open("GET", "php/dellTask.php?&texttask="+task, true);
+  xmlhttp.open("GET", "php/getStatusTask.php?&texttask="+"'"+task+"'", true);
   xmlhttp.send();
 
   function conn() 
@@ -99,6 +108,32 @@ function dellFromDbTask(task)
     {
       var line = xmlhttp.responseText;
       alert(line)
+    }
+  }
+}
+
+/////////////////////////////////////////////////////////
+// удалить таск из BD
+/////////////////////////////////////////////////////////
+
+function dellFromDbTask(task) 
+{
+  xmlhttp.onreadystatechange = conn;
+  xmlhttp.open("GET", "php/dellTask.php?&texttask="+"'"+task+"'", true);
+  xmlhttp.send();
+
+  function conn() 
+  { 
+
+    if (xmlhttp.readyState != 4) return;
+    if (xmlhttp.status != 200) 
+    {
+      alert(xhr.status + ': ' + xhr.statusText);
+    } 
+    else 
+    {
+      var line = xmlhttp.responseText;
+      //alert(line)
     }
   }
 }
@@ -168,7 +203,7 @@ function conn()
 }
 
 /////////////////////////////////////////////////////////
-// удалить таск
+// взять имя юзера из ссылки
 /////////////////////////////////////////////////////////
 
 OnLoad();
