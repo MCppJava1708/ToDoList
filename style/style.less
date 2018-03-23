@@ -66,14 +66,21 @@ li a:hover {
 	background-color: @color-active;
 }
 
-.div-login {
-  margin-left: auto;
-  margin-right: @margin-login;
+.active_log {
+	background-color: @color-auth;
+	.font-login(@color-main, @font-tahoma, @font-size-tahoma,
+		@font-weight-tahoma);
 }
-.a-login {
-	text-decoration: none;
-	.font-login(@color-form, @font-tahoma, @font-size-tahoma,
-		@font-weight-tahoma)
+
+.active_reg {
+	background-color: @color-auth-reg;
+	.font-login(@color-main, @font-tahoma, @font-size-tahoma,
+		@font-weight-tahoma);
+}
+
+.div-login {
+	margin-left: auto;
+	width: 300px;
 }
 
 footer {
