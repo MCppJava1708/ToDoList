@@ -23,24 +23,22 @@ Login.prototype.cheackUser = function(users) {
 } else if (users.email === this.userNameOrEmail &&
 	users.password === this.password) {
 	doc.location.href = "index.html?login="+ users.login;
-}
-else {
+}else {
 	shapeError();
 }
 }
 
 Login.prototype.loginRex = function(){
-	 if (this.userNameOrEmail.search(/^[a-zA-Z0-9_-]{3,16}$/) !=-1 &&
-	 	this.password.search(/^[a-z0-9_-]{6,18}$/) !=-1) {
-	 		readPHPCon(lgn.userNameOrEmail);
-	 } else if (this.userNameOrEmail.search( /^([a-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z\.]{2,6})$/) !=-1 &&
-	 	this.password.search(/^[a-z0-9_-]{6,18}$/) !=-1) {
-	 	
-	 }
-	  else {
-	 		count = 0;
-	 		shapeError();
-	 }
+	if (this.userNameOrEmail.search(/^[a-zA-Z0-9_-]{3,16}$/) !=-1 &&
+		this.password.search(/^[a-z0-9_-]{6,18}$/) !=-1) {
+		readPHPCon(lgn.userNameOrEmail);
+} else if (this.userNameOrEmail.search( /^([a-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z\.]{2,6})$/) !=-1 &&
+	this.password.search(/^[a-z0-9_-]{6,18}$/) !=-1) {
+	readPHPCon(lgn.userNameOrEmail);
+}else {
+	count = 0;
+	shapeError();
+}
 }
 
 ///////////////////////////////////////////
@@ -88,39 +86,44 @@ function conn() {
 		console.log(xmlhttp.status + ': ' + xmlhttp.statusText);
 	} else {
 		line = xmlhttp.responseText;
-		console.log(line);
-		if (line === "") {
-			lgn.cheackUser(line);
-		} else {
-			var arrLine=[];
-			arrLine = line.split(" ");
-			var count = 0;
-			var id;
-			var login;
-			var email;
-			var pass;
-			for (var i = 0; i < arrLine.length; i++) {
-				switch (count) {
-					case 0:
-					id = arrLine[i];
-					count++;
-					break;
-					case 1:
-					login = arrLine[i];
-					count++;
-					break;
-					case 2:
-					email = arrLine[i];
-					count++;
-					break;
-					case 3:
-					pass = arrLine[i];
-					var user = new User(id, login, email, pass);
-					lgn.cheackUser(user);
-					count = 0;
-					break;
-				}
-			}
+		deCrypt(line);
+	}
+}
+
+function deCrypt (encrypted) {
+	var key = 'd4b494e4502a62edd695a903a94c2701';
+	var iv = '02f30dffbb0d084755f438f7d8be4a7d';
+	var decrypted = mcrypt.Decrypt(atob(encrypted), iv, key, 'rijndael-256', 'cbc');
+	console.log(decrypted);
+	var arrLine=[];
+	arrLine = decrypted.split(" ");
+	var count = 0;
+	var id;
+	var login;
+	var email;
+	var pass;
+	for (var i = 0; i < arrLine.length; i++) {
+		console.log(arrLine[i]);
+		switch (count) {
+			case 0:
+			id = arrLine[i];
+			count++;
+			break;
+			case 1:
+			login = arrLine[i];
+			count++;
+			break;
+			case 2:
+			email = arrLine[i];
+			count++;
+			break;
+			case 3:
+			pass = arrLine[i];
+			var user = new User(id, login, email, pass);
+			console.log(user);
+			lgn.cheackUser(user);
+			count = 0;
+			break;
 		}
 	}
 }
