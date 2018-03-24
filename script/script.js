@@ -6,7 +6,7 @@ var count = 1;
 var id;
 var name = "Her";
 var task = document.getElementById('taskInput');
-var statusTask = true;
+var statusTask = 1;
 
 /////////////////////////////////////////////////////////
 //Добавить таск в HTML
@@ -17,11 +17,16 @@ function createTask(task){
   var text = task.task ;
   var t = document.createTextNode(text);
   newLi.appendChild(t);
+  
+  if(task.statusTask == 0)
+  {
+    newLi.classList.add('checked')
+  }
   taskUl.appendChild(newLi);
 
   //Создаем кнопку "close" и добавляем ее в <li>
   var span = document.createElement("SPAN");
-  var txt = document.createTextNode("  delete");
+  var txt = document.createTextNode(" \u00D7");
   span.className = "close";
   span.appendChild(txt);
   newLi.appendChild(span);
@@ -33,13 +38,17 @@ function createTask(task){
 /////////////////////////////////////////////////////////
 
 var list = document.getElementById("taskUl");
-list.addEventListener('click', function(ev) {
+list.addEventListener('click', function(ev) 
+{
   if (ev.target.tagName === 'LI')  
   {
-    ev.target.classList.toggle('checked');// добавить замену статуса в БД
-    alert(ev.target.innerText);
+    ev.target.classList.toggle('checked');
+    var str = ev.target.parentElement.innerText;
+    task = str.substring(0,str.indexOf(" "));
+    UpdateStatusTaskInDB(task);
   }
-  else if (ev.target.className === "close"){
+  else if (ev.target.className === "close")
+  {
     var str = ev.target.parentElement.innerText;
     task = str.substring(0,str.indexOf(" "));
     dellFromDbTask(task);
@@ -57,9 +66,67 @@ list.addEventListener('click', function(ev) {
 document.getElementById("addBton").onclick = function newElement() 
 {
   xmlhttp.onreadystatechange = conn;
-  str = "'"+ name + "','"+ task.value + "'," + statusTask;
+  str = "'"+ name + "','"+ task.value + "'," + 1;
   console.log(str);
   xmlhttp.open("GET", "php/createTask.php?&str="+str, true);
+  xmlhttp.send();
+
+  function conn() 
+  { 
+    if (xmlhttp.readyState != 4) return;
+    if (xmlhttp.status != 200) 
+    {
+      alert(xhr.status + ': ' + xhr.statusText);
+    } 
+    else 
+    {
+      var line = xmlhttp.responseText;
+      //alert(line)
+    }
+  }
+}
+
+/////////////////////////////////////////////////////////
+// Обновить statusTask из BD
+/////////////////////////////////////////////////////////
+
+function GetStatusTaskInDB(task) 
+{
+  xmlhttp.onreadystatechange = conn;
+  xmlhttp.open("GET", "php/getStatusTask.php?&texttask="+"'"+task+"'", true);
+  xmlhttp.send();
+
+  function conn() 
+  { 
+    if (xmlhttp.readyState != 4) return;
+    if (xmlhttp.status != 200) 
+    {
+      alert(xhr.status + ': ' + xhr.statusText);
+    } 
+    else 
+    {
+      var line = xmlhttp.responseText;
+      alert("statusTask: "+line)
+      statusTask = line;
+    }
+  }
+}
+
+function UpdateStatusTaskInDB(task) 
+{
+  GetStatusTaskInDB(task);
+  //alert(statusTask);
+  if(statusTask == 1)
+  {
+    statusTask = 0;
+  }
+  else
+  {
+    statusTask=1;
+  }
+
+  xmlhttp.onreadystatechange = conn;
+  xmlhttp.open("GET", "php/UpdateStatusTask.php?texttask=" + "'" +task+ "'" + "&statusTask=" + statusTask, true);
   xmlhttp.send();
 
   function conn() 
@@ -78,13 +145,14 @@ document.getElementById("addBton").onclick = function newElement()
 }
 
 /////////////////////////////////////////////////////////
-// удалить таск
+// удалить таск из BD
 /////////////////////////////////////////////////////////
 
 function dellFromDbTask(task) 
 {
+
   xmlhttp.onreadystatechange = conn;
-  xmlhttp.open("GET", "php/dellTask.php?&texttask="+task, true);
+  xmlhttp.open("GET", "php/dellTask.php?&texttask="+"'"+task+"'", true);
   xmlhttp.send();
 
   function conn() 
@@ -168,7 +236,7 @@ function conn()
 }
 
 /////////////////////////////////////////////////////////
-// удалить таск
+// взять имя юзера из ссылки
 /////////////////////////////////////////////////////////
 
 OnLoad();
