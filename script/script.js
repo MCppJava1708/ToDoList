@@ -6,7 +6,7 @@ var count = 1;
 var id;
 var name = "Her";
 var task = document.getElementById('taskInput');
-var statusTask = true;
+var statusTask = 1;
 
 /////////////////////////////////////////////////////////
 //Добавить таск в HTML
@@ -42,17 +42,17 @@ list.addEventListener('click', function(ev)
 {
   if (ev.target.tagName === 'LI')  
   {
-    //ev.target.classList.toggle('checked');
+    ev.target.classList.toggle('checked');
     var str = ev.target.parentElement.innerText;
     task = str.substring(0,str.indexOf(" "));
     UpdateStatusTaskInDB(task);
   }
-  /*else if (ev.target.className === "close")
+  else if (ev.target.className === "close")
   {
     var str = ev.target.parentElement.innerText;
     task = str.substring(0,str.indexOf(" "));
     dellFromDbTask(task);
-  }*/
+  }
 });
 //target- проверяет каждый элемент списка на котором у нас висит лиснер
 /*Каждый HTML элемент содержит свойство classList, которое представляет
@@ -66,7 +66,7 @@ list.addEventListener('click', function(ev)
 document.getElementById("addBton").onclick = function newElement() 
 {
   xmlhttp.onreadystatechange = conn;
-  str = "'"+ name + "','"+ task.value + "'," + statusTask;
+  str = "'"+ name + "','"+ task.value + "'," + 1;
   console.log(str);
   xmlhttp.open("GET", "php/createTask.php?&str="+str, true);
   xmlhttp.send();
@@ -87,10 +87,10 @@ document.getElementById("addBton").onclick = function newElement()
 }
 
 /////////////////////////////////////////////////////////
-// Взять statusTask из BD
+// Обновить statusTask из BD
 /////////////////////////////////////////////////////////
 
-function UpdateStatusTaskInDB(task) 
+function GetStatusTaskInDB(task) 
 {
   xmlhttp.onreadystatechange = conn;
   xmlhttp.open("GET", "php/getStatusTask.php?&texttask="+"'"+task+"'", true);
@@ -98,7 +98,39 @@ function UpdateStatusTaskInDB(task)
 
   function conn() 
   { 
+    if (xmlhttp.readyState != 4) return;
+    if (xmlhttp.status != 200) 
+    {
+      alert(xhr.status + ': ' + xhr.statusText);
+    } 
+    else 
+    {
+      var line = xmlhttp.responseText;
+      alert("statusTask: "+line)
+      statusTask = line;
+    }
+  }
+}
 
+function UpdateStatusTaskInDB(task) 
+{
+  GetStatusTaskInDB(task);
+  //alert(statusTask);
+  if(statusTask == 1)
+  {
+    statusTask = 0;
+  }
+  else
+  {
+    statusTask=1;
+  }
+
+  xmlhttp.onreadystatechange = conn;
+  xmlhttp.open("GET", "php/UpdateStatusTask.php?texttask=" + "'" +task+ "'" + "&statusTask=" + statusTask, true);
+  xmlhttp.send();
+
+  function conn() 
+  { 
     if (xmlhttp.readyState != 4) return;
     if (xmlhttp.status != 200) 
     {
@@ -118,6 +150,7 @@ function UpdateStatusTaskInDB(task)
 
 function dellFromDbTask(task) 
 {
+
   xmlhttp.onreadystatechange = conn;
   xmlhttp.open("GET", "php/dellTask.php?&texttask="+"'"+task+"'", true);
   xmlhttp.send();
@@ -133,7 +166,7 @@ function dellFromDbTask(task)
     else 
     {
       var line = xmlhttp.responseText;
-      //alert(line)
+      alert(line)
     }
   }
 }
