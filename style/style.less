@@ -66,23 +66,6 @@ li a:hover {
 	background-color: @color-active;
 }
 
-.active_log {
-	background-color: @color-auth;
-	.font-login(@color-main, @font-tahoma, @font-size-tahoma,
-		@font-weight-tahoma);
-}
-
-.active_reg {
-	background-color: @color-auth-reg;
-	.font-login(@color-main, @font-tahoma, @font-size-tahoma,
-		@font-weight-tahoma);
-}
-
-.div-login {
-	margin-left: auto;
-	width: 300px;
-}
-
 footer {
 	height: @height-nav; 
 	background-color: @color-black;
@@ -279,27 +262,27 @@ fieldset {
 }
 
 .registration-tooltip {
-	border-bottom: 1px dotted #0077AA;
-	cursor: help;
+  border-bottom: 1px dotted #0077AA;
+  cursor: help;
 }
 
 .registration-tooltip::after {
-	background: black;
-	border-radius: 8px 8px 8px 0px;
-	box-shadow: 1px 1px 10px grey;
-	color: white;
-	content: attr(data-tooltip); /* содержимое всплывающей подсказки */
-	margin-top: -24px;
-	opacity: 0; /* элемент прозрачен... */
-	padding: 3px 7px;
-	position: absolute;
-	visibility: hidden; /*элемент скрыт */ 
-
+  background: black;
+  border-radius: 8px 8px 8px 0px;
+  box-shadow: 1px 1px 10px grey;
+  color: white;
+  content: attr(data-tooltip); /* содержимое всплывающей подсказки */
+  margin-top: -24px;
+  opacity: 0; /* элемент прозрачен... */
+  padding: 3px 7px;
+  position: absolute;
+  visibility: hidden; /*элемент скрыт */ 
+  
 }
-
+    
 .registration-tooltip:hover::after {
-	opacity: 1; /* показать элемент */
-	visibility: visible;
+  opacity: 1; /* показать элемент */
+  visibility: visible;
 }
 
 .registration-img {
@@ -314,8 +297,13 @@ fieldset {
 }
 
 .registration-error {
-	background-color: red;
-	color: white;
-	display: none;
-	visibility: false;
+	color: #FFFFFFFF;
+	border-radius: 10px;
+	background-color: #FF6570FF;
+	text-align: center;
+}
+
+.buutton-color:disabled {
+	background-color: lighten(@color-button-sign-in, 40%);
+	color: darken(@color-form, 50%);
 }
