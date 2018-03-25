@@ -76,35 +76,35 @@ list.addEventListener('click', function(ev)
 
 function UpdateStatusTaskInDB(taskText) 
 {
-  GetStatusTaskInDB(taskText);
-  //alert(statusTask);
-  if(statusTask == 0)
-  {
-    statusTask = 1;
-  }
-  else
-  {
-    statusTask = 0;
-  }
+  alert(GetStatusTaskInDB(taskText));
+ //GetStatusTaskInDB(taskText)
+ if(statusTask == 0)
+ {
+  statusTask = 1;
+}
+else
+{
+  statusTask = 0;
+}
 
-  xmlhttp.onreadystatechange = conn;
-  xmlhttp.open("GET", "php/UpdateStatusTask.php?texttask=" + "'" +taskText+ "'" + "&statusTask=" + statusTask, true);
-  xmlhttp.send();
+xmlhttp.onreadystatechange = conn;
+xmlhttp.open("GET", "php/UpdateStatusTask.php?texttask=" + "'" +taskText+ "'" + "&statusTask=" + statusTask, true);
+xmlhttp.send();
 
-  function conn() 
-  { 
-    if (xmlhttp.readyState != 4) return;
-    if (xmlhttp.status != 200) 
-    {
-      alert(xhr.status + ': ' + xhr.statusText);
-    } 
-    else 
-    {
-      var line = xmlhttp.responseText;
-      //alert(line)
-      readDb(name);
-    }
+function conn() 
+{ 
+  if (xmlhttp.readyState != 4) return;
+  if (xmlhttp.status != 200) 
+  {
+    alert(xhr.status + ': ' + xhr.statusText);
+  } 
+  else 
+  {
+    var line = xmlhttp.responseText;
+    alert(line)
+    readDb(name);
   }
+}
 }
 
 function GetStatusTaskInDB(taskText) 
@@ -124,7 +124,7 @@ function GetStatusTaskInDB(taskText)
     {
       var line = xmlhttp.responseText;
       alert("statusTask was: "+line)
-      statusTask = line;
+      return statusTask = line;
     }
   }
 }
