@@ -11,7 +11,9 @@ var imgPassFail1 = document.getElementById('imgPassFail1');
 var imgPassOK2   = document.getElementById('imgPassOK2');
 var imgPassFail2 = document.getElementById('imgPassFail2');
 var pass2Error   = document.getElementById('pass2Error');
-var btn          = document.getElementById('btnsend');
+var btnsend      = document.getElementById('btnsend');
+var btnfail		 = document.getElementById('btnfail');
+var sendError	 = document.getElementById('sendError');
 var loginError   = document.getElementById('loginError');
 var emailError   = document.getElementById('emailError');
 var passError    = document.getElementById('passError');
@@ -22,8 +24,16 @@ var emailOK      = false;
 var passOK       = false;
 var pass2OK      = false;
 
-login.onblur = function () 
+btnfail.onclick = btnFailClick;
+btnsend.onclick = sendLogin;
+login.onblur    = checkLogin;
+email.onblur    = checkEmail;
+pass.onblur		= checkPass;
+pass2.onblur	= checkPass2;
+
+function checkLogin ()
 {
+	alert ("checkLogin");
 	var val = login.value;
 	if (val == "")
 		return;
@@ -39,7 +49,7 @@ login.onblur = function ()
 	send (sendStr, "php/registerCheck.php");
 }
 
-email.onblur = function ()
+function checkEmail ()
 {
 	var val = email.value;
 	if (val == "")
@@ -56,7 +66,7 @@ email.onblur = function ()
 	send (sendStr, "php/registerCheck.php");
 }
 
-pass.onblur = function () 
+function checkPass () 
 {
 	strpass  = pass.value;
 	strpass2 = pass2.value;
@@ -78,7 +88,7 @@ pass.onblur = function ()
 	}
 }
 
-pass2.onblur = function () 
+function checkPass2 () 
 {
 	strpass  = pass.value;
 	strpass2 = pass2.value;
@@ -97,13 +107,13 @@ pass2.onblur = function ()
 		pass2OK = false;
 		pass2Error.innerHTML = str;
 		styleCorrection (imgPassOK2, imgPassFail2);
-	}	
+	}
 }
 
-btn.onclick = function ()
+function sendLogin ()
 {
 	var sendStr = "login=" + login.value + "&email=" + email.value + "&pass=" + pass.value;
-	send (sendStr, "php/register.php");		
+	send (sendStr, "php/register.php");
 }
 
 function passwordCheck (strpass, strpass2) 
@@ -124,6 +134,31 @@ function passwordCheck (strpass, strpass2)
 		return "Password 1 must equals to password 2";
 				
 	return "OK";
+}
+
+function btnFailClick ()
+{
+	if (nameOK && emailOK && passOK)
+		checkPass2();
+	else if (nameOK && emailOK && pass2OK)
+		checkPass();
+	else if (nameOK && passOK && pass2OK)
+		checkEmail();
+	else if (emailOK && passOK && pass2OK)
+		checkLogin();
+
+	if (nameOK && emailOK && passOK && pass2OK)
+	{
+		alert ("Send login");
+		sendLogin ();
+		alert (2);
+	}
+	else
+	{
+		alert (1);
+		sendError.innerHTML = "Please check that correction of field filling";
+		alert (2);
+	}
 }
 
 function send (sendStr, host)
@@ -184,7 +219,17 @@ function styleCorrection (hidd, show)
 	show.style.visible = true;
 
 	if (nameOK && emailOK && passOK && pass2OK)
-		btnsend.disabled = false;
+	{
+		btnsend.style.display = 'block';
+		btnsend.style.visible = true;
+		btnfail.style.display = 'none';
+		btnfail.style.visible = false;
+	}
 	else
-		btnsend.disabled = true;
+	{
+		btnsend.style.display = 'none';
+		btnsend.style.visible = false;
+		btnfail.style.display = 'block';
+		btnfail.style.visible = true;
+	}
 }
