@@ -66,7 +66,16 @@ li a:hover {
 	background-color: @color-active;
 }
 
+.active_log {
+	background-color: @color-auth;
+}
+
+.active_reg {
+	background-color: @color-auth-reg;
+}
+
 .div-login {
+	width: @width-ra;
 	margin-left: auto;
 }
 
@@ -183,7 +192,6 @@ fieldset {
 	min-height: calc(~"100vh - 120px");
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
 	align-items: center;
 }
 
@@ -217,25 +225,52 @@ fieldset {
 		color: white;
 	}
 }
-.add-task{
-	input {
 
-		padding: 12px;
-		float: left;
-		
+.content-task-main {
+	width: 500px;
+	height: 80px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	background-color: @color-auth-task-main;
+	border-radius: 20%;
+}
+
+.content-task-input {
+	width: 400px;
+	display: flex;
+	flex-direction: column; 
+	align-items: center;
+	input {
+		width: 380px;
+		height: 25px;
+		border-top: none; 
+		border-right: none;
+		border-left: none;
+		border-bottom: none; 
 	}
+}
+
+.content-task-button {
+	width: 100px;
+	display: flex;
+	flex-direction: column; 
+	align-items: center;
 	.addBtn {
-		padding: 10px;
-		background: gray;
+		width: 90px;
+		height: 32px;
+		background: @color-button-sign-in;
 		color: white;
-		float: left;
+		float: right;
 		text-align: center;
 		font-size: 16px;
 	}
+}
 
-	.addBtn:hover {
-		background-color: green;
-	}
+.content-task-title {
+	.font-login(@color-vanila, @font-verdana, @font-size-verdana, 
+		@font-weight-verdana);
 }
 
 ///////////////////////////////////////
