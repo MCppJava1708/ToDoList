@@ -4,7 +4,7 @@ var taskUl = document.getElementById('taskUl');
 var count = 1;
 
 var id;
-var name = "Her";
+var name = "H";
 var task = document.getElementById('taskInput');
 var statusTask = 1;
 
@@ -42,7 +42,7 @@ list.addEventListener('click', function(ev)
 {
   if (ev.target.tagName === 'LI')  
   {
-    ev.target.classList.toggle('checked');
+    //ev.target.classList.toggle('checked');
     var str = ev.target.parentElement.innerText;
     task = str.substring(0,str.indexOf(" "));
     UpdateStatusTaskInDB(task);
