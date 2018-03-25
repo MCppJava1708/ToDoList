@@ -15,7 +15,7 @@ if($result)
 {
 	$row = mysqli_fetch_row($result);
 	
-		echo "$row[0] ";
+		echo $row[0] ;
 	
 	mysqli_free_result($result);
 }

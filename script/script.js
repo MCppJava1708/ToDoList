@@ -54,15 +54,17 @@ list.addEventListener('click', function(ev)
   if (ev.target.tagName === 'LI')  
   {
     //ev.target.classList.toggle('checked');
-    var str = ev.target.parentElement.innerText;
+    var str = ev.target.innerText;
     taskText = str.substring(0,str.indexOf(" "));
-    GetStatusTaskInDB(taskText);
+    UpdateStatusTaskInDB(taskText);
+    
   }
   else if (ev.target.className === "close")
   {
     var str = ev.target.parentElement.innerText;
     taskText = str.substring(0,str.indexOf(" "));
     dellFromDbTask(taskText);
+    
   }
 });
 //target- проверяет каждый элемент списка на котором у нас висит лиснер
@@ -76,13 +78,13 @@ function UpdateStatusTaskInDB(taskText)
 {
   GetStatusTaskInDB(taskText);
   //alert(statusTask);
-  if(statusTask == 1)
+  if(statusTask == 0)
   {
-    statusTask = 0;
+    statusTask = 1;
   }
   else
   {
-    statusTask = 1;
+    statusTask = 0;
   }
 
   xmlhttp.onreadystatechange = conn;
@@ -100,16 +102,16 @@ function UpdateStatusTaskInDB(taskText)
     {
       var line = xmlhttp.responseText;
       //alert(line)
-      //readDb(name);
+      readDb(name);
     }
   }
 }
 
 function GetStatusTaskInDB(taskText) 
 {
-  xmlhttp.onreadystatechange = conn;
   xmlhttp.open("GET", "php/getStatusTask.php?&texttask="+"'"+taskText+"'", true);
   xmlhttp.send();
+  xmlhttp.onreadystatechange = conn;
 
   function conn() 
   { 
@@ -133,10 +135,9 @@ function GetStatusTaskInDB(taskText)
 
 function dellFromDbTask(taskText) 
 {
-
-  xmlhttp.onreadystatechange = conn;
   xmlhttp.open("GET", "php/dellTask.php?&texttask="+"'"+taskText+"'", true);
   xmlhttp.send();
+  xmlhttp.onreadystatechange = conn;
 
   function conn() 
   { 
@@ -174,9 +175,9 @@ function readDb(login)
 {
   document.getElementById('taskUl').innerHTML = '';
 
-  xmlhttp.onreadystatechange = conn;
   xmlhttp.open("GET", "php/readTask.php?name=" + login, true);
   xmlhttp.send();
+  xmlhttp.onreadystatechange = conn;
 }
 
 function conn() 
