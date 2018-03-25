@@ -35,10 +35,10 @@ Login.prototype.loginRex = function(){
 } else if (this.userNameOrEmail.search( /^([a-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z\.]{2,6})$/) !=-1 &&
 	this.password.search(/^[a-z0-9_-]{6,18}$/) !=-1) {
 	readPHPCon(lgn.userNameOrEmail);
-}else {
-	count = 0;
-	shapeError();
+} else {
+ 		shapeError();
 }
+	
 }
 
 ///////////////////////////////////////////
@@ -59,13 +59,13 @@ function User (id, login, email, password) {
 function shapeError () {
 	node = doc.createElement('div');
 	node.className = "divErr";
+	node.style.height = 50 + 'px';
 	node.innerHTML = "Incorrect username or password.";
-	node.position = 'absolute';
-	node.tabIndex = ++count;
-	node.style.color = '#FFFFFFFF';
+	node.style.color = '#000000FF';
 	node.style.borderRadius = 10 + 'px';
-	node.style.backgroundColor =  '#FF6570FF';
+	node.style.backgroundColor =  '#FF003DFF';
 	divError.appendChild(node);
+	count++;
 }
 
 ///////////////////////////////////////////
@@ -134,10 +134,10 @@ function deCrypt (encrypted) {
 
 doc.getElementById("btnSignIn").onclick = function () {
 	lgn = new Login(userNameOrEmail, password);
-	lgn.loginRex();
 	if (count > 1) {
 		divError.removeChild(node);
 	} 
+	lgn.loginRex();
 }
 
 doc.getElementById('inputPassword').oninput = function () {
