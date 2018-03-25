@@ -67,16 +67,51 @@ li a:hover {
 }
 
 .active_log {
-	background-color: @color-auth;
+	text-decoration: none;
+	color: @color-auth-index;
 }
 
 .active_reg {
-	background-color: @color-auth-reg;
+	text-decoration: none;
+	color: @color-auth-task-main;
 }
 
 .div-login {
-	width: @width-ra;
+	width: @width-div-login;
+	min-width: @widt-min-div-login;
 	margin-left: auto;
+	height: @height-body;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	div {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-around;
+	}
+}
+
+.div-login a:hover {
+	color: @color-button-sign-in;
+}
+
+.div-login-sign {
+	width: @widt-div-login-sign;
+	height: @height-div-login;
+}
+
+.div-login-sign:hover {
+	background-color: @color-auth-reg_hover;
+}
+
+.div-login-reg {
+	width: @widt-div-login-reg;
+	height: @height-div-login;
+}
+
+.div-login-reg:hover {
+	background-color: @color-auth-reg_hover;
 }
 
 footer {
@@ -89,9 +124,9 @@ footer {
 }
 
 .page-footer__paragraf {
-	width: 150px;
+	width: @widt-min-div-login;
 	text-align: left;
-	margin-right: 10px;
+	margin-right: @margin-p_text;
 	color: @color-white;
 }	
 
@@ -227,23 +262,23 @@ fieldset {
 }
 
 .content-task-main {
-	width: 500px;
+	width: 30%;
+	min-width: 240px;
 	height: 80px;
 	display: flex;
 	flex-direction: row;
-	justify-content: space-between;
 	align-items: center;
 	background-color: @color-auth-task-main;
 	border-radius: 20%;
 }
 
 .content-task-input {
-	width: 400px;
+	width: 450px;
 	display: flex;
 	flex-direction: column; 
 	align-items: center;
 	input {
-		width: 380px;
+		width: 95%;
 		height: 25px;
 		border-top: none; 
 		border-right: none;
@@ -253,12 +288,12 @@ fieldset {
 }
 
 .content-task-button {
-	width: 100px;
+	width: 150px;
 	display: flex;
 	flex-direction: column; 
 	align-items: center;
 	.addBtn {
-		width: 82px;
+		width: 88%;
 		height: 28px;
 		background: @color-button-sign-in;
 		color: white;
@@ -301,27 +336,27 @@ fieldset {
 }
 
 .registration-tooltip {
-  border-bottom: 1px dotted #0077AA;
-  cursor: help;
+	border-bottom: 1px dotted #0077AA;
+	cursor: help;
 }
 
 .registration-tooltip::after {
-  background: black;
-  border-radius: 8px 8px 8px 0px;
-  box-shadow: 1px 1px 10px grey;
-  color: white;
-  content: attr(data-tooltip); /* содержимое всплывающей подсказки */
-  margin-top: -24px;
-  opacity: 0; /* элемент прозрачен... */
-  padding: 3px 7px;
-  position: absolute;
-  visibility: hidden; /*элемент скрыт */ 
-  
+	background: black;
+	border-radius: 8px 8px 8px 0px;
+	box-shadow: 1px 1px 10px grey;
+	color: white;
+	content: attr(data-tooltip); /* содержимое всплывающей подсказки */
+	margin-top: -24px;
+	opacity: 0; /* элемент прозрачен... */
+	padding: 3px 7px;
+	position: absolute;
+	visibility: hidden; /*элемент скрыт */ 
+
 }
-    
+
 .registration-tooltip:hover::after {
-  opacity: 1; /* показать элемент */
-  visibility: visible;
+	opacity: 1; /* показать элемент */
+	visibility: visible;
 }
 
 .registration-img {
