@@ -8,21 +8,29 @@
 </head>
 <body>
 	<div class = "wrap">
-		<div class = "main">
+		<div class = "main main_color">
 			<header>
 				<nav class="navbar">
 					<div class="navbar_img-logo">
 						<img class="img-logo" src="images/logo.png" alt="">
 					</div>
 					<ul>
-						<li><a class="active" href="index.html">ToDoList</a></li>
+						<li><a href="index.html">ToDoList</a></li>
 					</ul>
+					<div class="div-login">
+						<div class="div-login-sign">
+							<a class="active_log" href="login.html">Sing in</a>
+						</div>
+						<div class="div-login-reg">
+							<a class="active active_reg" href="registration.html">Registration</a>
+						</div>
+					</div>
 				</nav>
 			</header>
 			<main>
 				<div class="content-main-login">
 					<h2 class="auth-label">ToDoList</h2>
-					<div class="content-form_center">
+					<div class="content-form-registration">
 						<fieldset class="registration-fieldset">
 							<legend class="registration-text">Registration</legend>
 							<div class="elem">
@@ -30,7 +38,7 @@
 									<label class="registration-tooltip" data-tooltip="Enter your name" for="login">login:</label>
 								</div>
 								<div>
-									<input id="login" type="text" placeholder="Enter your login" required>
+									<input id="login" class="content-input_size input-border_style" type="text" placeholder="Enter your login" required>
 								</div>
 								<div>
 									<img id="imgLoginOk" class="registration-img" src="images/correct.png">
@@ -43,7 +51,7 @@
 									<label class="registration-tooltip" data-tooltip="Enter your email" for="email">e-mail:</label>
 								</div>
 								<div>
-									<input id="email" type = "email" placeholder="Enter your e-mail" required>
+									<input id="email" class="content-input_size input-border_style" type = "email" placeholder="Enter your e-mail" required>
 								</div>
 								<div>
 									<img id="imgEmailOk" class="registration-img" src="images/correct.png">
@@ -56,7 +64,7 @@
 									<label class="registration-tooltip" data-tooltip="The length of password must be at least 8 symbols and it must include latin leters and numbers" for="pass">password: </label>
 								</div>
 								<div>							
-									<input id="pass" type="password" placeholder="Enter your password" required>
+									<input id="pass" type="password" class="content-input_size input-border_style" placeholder="Enter your password" required>
 								</div>
 								<div>
 									<img id="imgPassOK1" class="registration-img" src="images/correct.png">
@@ -69,7 +77,7 @@
 									<label class="registration-tooltip" data-tooltip="The length of password must be at least 8 symbols and it must include latin leters and numbers" for="pass2">password again:</label>
 								</div>
 								<div>
-									<input id="pass2" type = "password" placeholder="Repeat your password" required>
+									<input id="pass2" type = "password" class="content-input_size input-border_style" placeholder="Repeat your password" required>
 								</div>
 								<div>
 									<img id="imgPassOK2" class="registration-img" src="images/correct.png">
@@ -78,8 +86,7 @@
 							</div>
 							<br>
 							<div>
-								<input type="button" id="btnfail" class="button-size button-border_style button-color1" name="send" value="registration">
-								<input type="button" id="btnsend" class="button-size button-border_style buutton-color button-visible" name="send" value="registration">
+								<input type="button" id="btnsend" class="button-size button-border_style button-color1" value="registration">
 							</div>
 						</fieldset>
 						<br>

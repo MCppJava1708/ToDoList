@@ -12,20 +12,19 @@ var imgPassOK2   = document.getElementById('imgPassOK2');
 var imgPassFail2 = document.getElementById('imgPassFail2');
 var pass2Error   = document.getElementById('pass2Error');
 var btnsend      = document.getElementById('btnsend');
-var btnfail		 = document.getElementById('btnfail');
 var sendError	 = document.getElementById('sendError');
 var loginError   = document.getElementById('loginError');
 var emailError   = document.getElementById('emailError');
 var passError    = document.getElementById('passError');
 var pass2Error   = document.getElementById('pass2Error');
 var xhr          = new XMLHttpRequest();
+var sendFlag	 = false;
 var nameOK       = false;
 var emailOK      = false;
 var passOK       = false;
 var pass2OK      = false;
 
-btnfail.onclick = btnFailClick;
-btnsend.onclick = sendLogin;
+btnsend.onclick = checkBtn;
 login.onblur    = checkLogin;
 email.onblur    = checkEmail;
 pass.onblur		= checkPass;
@@ -33,7 +32,6 @@ pass2.onblur	= checkPass2;
 
 function checkLogin ()
 {
-	alert ("checkLogin");
 	var val = login.value;
 	if (val == "")
 		return;
@@ -69,13 +67,20 @@ function checkEmail ()
 function checkPass () 
 {
 	strpass  = pass.value;
+	if (strpass == "")
+		return;
+	
 	strpass2 = pass2.value;
 	str      = passwordCheck (strpass, strpass2);
 	if (str == "OK")
 	{
 		passOK = true;
 		if (strpass2 == strpass)
+		{
 			pass2OK = true;
+			pass2Error.innerHTML = "";
+			styleCorrection (imgPassFail2, imgPassOK2);	
+		}
 
 		passError.innerHTML = "";
 		styleCorrection (imgPassFail1, imgPassOK1);	
@@ -90,14 +95,21 @@ function checkPass ()
 
 function checkPass2 () 
 {
-	strpass  = pass.value;
 	strpass2 = pass2.value;
+	if (strpass2 == "")
+		return;
+
+	strpass  = pass.value;
 	str = passwordCheck (strpass2, strpass);
 	if (str == "OK")
 	{
 		pass2OK = true;
 		if (strpass2 == strpass)
-			pass2OK = true;
+		{
+			passOK = true;
+			passError.innerHTML = "";
+			styleCorrection (imgPassFail1, imgPassOK1);	
+		}
 
 		pass2Error.innerHTML = "";
 		styleCorrection (imgPassFail2, imgPassOK2);
@@ -136,8 +148,12 @@ function passwordCheck (strpass, strpass2)
 	return "OK";
 }
 
-function btnFailClick ()
+function checkBtn ()
 {
+	if (nameOK && emailOK && passOK && pass2OK)
+		sendLogin ();
+
+	sendFlag = true;
 	if (nameOK && emailOK && passOK)
 		checkPass2();
 	else if (nameOK && emailOK && pass2OK)
@@ -146,18 +162,11 @@ function btnFailClick ()
 		checkEmail();
 	else if (emailOK && passOK && pass2OK)
 		checkLogin();
-
-	if (nameOK && emailOK && passOK && pass2OK)
-	{
-		alert ("Send login");
-		sendLogin ();
-		alert (2);
-	}
 	else
 	{
-		alert (1);
+		sendFlag = false;
 		sendError.innerHTML = "Please check that correction of field filling";
-		alert (2);
+		setTimeout(function(){sendError.innerHTML = ""}, 4000);
 	}
 }
 
@@ -180,29 +189,43 @@ function receive ()
 	else 
 	{
 		var res = xhr.responseText;
-		if (res == 0)
+		if (res >= 0 && res <= 3)
 		{
-			nameOK = true;
-			loginError.innerHTML = "";
-			styleCorrection (imgLoginFail, imgLoginOk);
-		}
-		else if (res == 1)
-		{
-			nameOK = false;
-			loginError.innerHTML = "Selected login is alredy used. Please select other login.";
-			styleCorrection (imgLoginOk, imgLoginFail);
-		}
-		else if (res == 2)
-		{
-			emailOK = true;
-			emailError.innerHTML = "";
-			styleCorrection (imgEmailFail, imgEmailOk);
-		}
-		else if (res == 3)
-		{
-			emailOK = false;
-			emailError.innerHTML = "Selected email is alredy used. Please select other email.";
-			styleCorrection (imgEmailOk, imgEmailFail);
+			switch (res)
+			{
+			case "0":
+				nameOK = true;
+				loginError.innerHTML = "";
+				styleCorrection (imgLoginFail, imgLoginOk);
+				break;
+			case "1":
+				nameOK = false;
+				loginError.innerHTML = "Selected login is alredy used. Please select other login.";
+				styleCorrection (imgLoginOk, imgLoginFail);
+				break;
+			case "2":
+				emailOK = true;
+				emailError.innerHTML = "";
+				styleCorrection (imgEmailFail, imgEmailOk);
+				break;
+			case "3":
+				emailOK = false;
+				emailError.innerHTML = "Selected email is alredy used. Please select other email.";
+				styleCorrection (imgEmailOk, imgEmailFail);
+				break;
+
+				if (sendFlag)
+				{
+					if (nameOK && emailOK && passOK && pass2OK)
+						sendLogin ();
+					else
+					{
+						sendError.innerHTML = "Please check that correction of field filling";
+						sendFlag = false;
+						setTimeout(function(){sendError.innerHTML = ""}, 4000);
+					}
+				}
+			}
 		}
 		else if (res == 4)
 			document.location.href = "index.html?login=" + login.value;
@@ -220,16 +243,7 @@ function styleCorrection (hidd, show)
 
 	if (nameOK && emailOK && passOK && pass2OK)
 	{
-		btnsend.style.display = 'block';
-		btnsend.style.visible = true;
-		btnfail.style.display = 'none';
-		btnfail.style.visible = false;
-	}
-	else
-	{
-		btnsend.style.display = 'none';
-		btnsend.style.visible = false;
-		btnfail.style.display = 'block';
-		btnfail.style.visible = true;
+		btnsend.style.backgroundColor = "rgb(102, 233, 21)";
+		btnsend.style.color = 'white';
 	}
 }
