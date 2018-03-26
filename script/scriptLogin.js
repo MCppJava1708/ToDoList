@@ -38,7 +38,6 @@ Login.prototype.loginRex = function(){
 } else {
  		shapeError();
 }
-	
 }
 
 ///////////////////////////////////////////
