@@ -2,6 +2,7 @@ var tasks = [];
 var xmlhttp = new XMLHttpRequest();
 var taskUl = document.getElementById('taskUl');
 var taskTextInput = document.getElementById('taskInput');
+var addBton = document.getElementById("addBton");
 
 var id;
 var name = "H";
@@ -14,7 +15,7 @@ var statusTask = 1;
 // Создайте новый элемент списка, нажав кнопку «Добавить»
 /////////////////////////////////////////////////////////
 
-document.getElementById("addBton").onclick = function newElement() 
+addBton.onclick = function newElement() 
 {
   xmlhttp.onreadystatechange = conn;
   str = "'"+ name + "','"+ taskTextInput.value + "'," + 1;
@@ -48,7 +49,7 @@ document.getElementById("addBton").onclick = function newElement()
 //Добавьте символ «checked» (перечеркнуть строку), когда вы нажимаете на 
 //элемент списка) и удаление при нажатии на delete
 
-var list = document.getElementById("taskUl");
+var list = taskUl;
 list.addEventListener('click', function(ev) 
 {
   if (ev.target.tagName === 'LI')  
@@ -56,6 +57,7 @@ list.addEventListener('click', function(ev)
     //ev.target.classList.toggle('checked');
     var str = ev.target.innerText;
     taskText = str.substring(0,str.indexOf(" "));
+    alert("достаем таск"+taskText);
     UpdateStatusTaskInDB(taskText);
     
   }
@@ -63,6 +65,7 @@ list.addEventListener('click', function(ev)
   {
     var str = ev.target.parentElement.innerText;
     taskText = str.substring(0,str.indexOf(" "));
+    alert("достаем таск"+taskText);
     dellFromDbTask(taskText);
     
   }
@@ -76,35 +79,36 @@ list.addEventListener('click', function(ev)
 
 function UpdateStatusTaskInDB(taskText) 
 {
-  alert(GetStatusTaskInDB(taskText));
- //GetStatusTaskInDB(taskText)
- if(statusTask == 0)
- {
-  statusTask = 1;
-}
-else
-{
-  statusTask = 0;
-}
-
-xmlhttp.onreadystatechange = conn;
-xmlhttp.open("GET", "php/UpdateStatusTask.php?texttask=" + "'" +taskText+ "'" + "&statusTask=" + statusTask, true);
-xmlhttp.send();
-
-function conn() 
-{ 
-  if (xmlhttp.readyState != 4) return;
-  if (xmlhttp.status != 200) 
+  GetStatusTaskInDB(taskText);
+  //alert(statusTask);
+  alert("update");
+  if(statusTask == 0)
   {
-    alert(xhr.status + ': ' + xhr.statusText);
-  } 
-  else 
-  {
-    var line = xmlhttp.responseText;
-    alert(line)
-    readDb(name);
+    statusTask = 1;
   }
-}
+  else
+  {
+    statusTask = 0;
+  }
+
+  xmlhttp.onreadystatechange = conn;
+  xmlhttp.open("GET", "php/UpdateStatusTask.php?texttask=" + "'" +taskText+ "'" + "&statusTask=" + statusTask, true);
+  xmlhttp.send();
+
+  function conn() 
+  { 
+    if (xmlhttp.readyState != 4) return;
+    if (xmlhttp.status != 200) 
+    {
+      alert(xhr.status + ': ' + xhr.statusText);
+    } 
+    else 
+    {
+      var line = xmlhttp.responseText;
+      //alert(line)
+      readDb(name);
+    }
+  }
 }
 
 function GetStatusTaskInDB(taskText) 
@@ -123,8 +127,8 @@ function GetStatusTaskInDB(taskText)
     else 
     {
       var line = xmlhttp.responseText;
-      alert("statusTask was: "+line)
-      return statusTask = line;
+      //alert("statusTask was: "+line)
+      statusTask = line;
     }
   }
 }
@@ -173,7 +177,7 @@ function Task (id, name, taskText, statusTask) {
 
 function readDb(login) 
 {
-  document.getElementById('taskUl').innerHTML = '';
+  taskUl.innerHTML = '';
 
   xmlhttp.open("GET", "php/readTask.php?name=" + login, true);
   xmlhttp.send();
@@ -226,7 +230,7 @@ function conn()
 
 function createTask(task){
   var newLi = document.createElement('li');  
-  var taskText = task.taskText ;
+  taskText = task.taskText ;
   var t = document.createTextNode(taskText);
   newLi.appendChild(t);
   
@@ -237,11 +241,11 @@ function createTask(task){
   taskUl.appendChild(newLi);
 
   //Создаем кнопку "close" и добавляем ее в <li>
-  var span = document.createElement("SPAN");
-  var txt = document.createTextNode(" \u00D7");
-  span.className = "close";
-  span.appendChild(txt);
-  newLi.appendChild(span);
+  var button = document.createElement("button");
+  var txt = document.createTextNode("\u00D7");
+  button.className = "close";
+  button.appendChild(txt);
+  newLi.appendChild(button);
 }
 
 /////////////////////////////////////////////////////////
