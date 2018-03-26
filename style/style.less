@@ -191,9 +191,29 @@ fieldset {
 	width: @width-input;
 }
 
-.div-lable {
+.div-lable-user-name{
 	height: @height-input;
 	line-height: @line-height__in-form;
+}
+
+.div-lable {
+	height: @height-input;
+	width: 100%;
+	line-height: @line-height__in-form;
+	display: flex;
+	flex-direction: row;
+	label{
+		display: block;
+		width: 50%;
+	}
+	a{
+		display: block;
+		width: 50%;
+		font-size: 12px;
+		text-decoration: none;
+		text-align: right;
+		color: @color-forgot-password;
+	}
 }
 
 .button-size {
@@ -204,6 +224,7 @@ fieldset {
 .buutton-color {
 	background-color: @color-button-sign-in;
 	color: @color-form;
+	cursor: pointer;
 }
 .button-border_style {
 	border-radius: @radius-input;
