@@ -341,16 +341,25 @@ fieldset {
 //////// REGISTRARION ////////////////
 //////////////////////////////////////
 
+.content-form-registration {
+	width: @width-form-registration;
+	height: @height-form;
+	background-color: @color-main;
+}
+
 .elem {
 	display: flex;
 	flex-direction: row;
 	height: @height-elem-registration;
 	align-items: center;
 	justify-content: flex-start;
+	height: @height-input;
+	line-height: @line-height__in-form;
 }
 
 .lbl__elem {
 	width: @width-elem-registration;
+
 }
 
 
@@ -389,8 +398,8 @@ fieldset {
 }
 
 .registration-img {
-	height: 20px;
-	padding-left: 5px;
+	height: @height-img-registration;
+	padding-left: @padding-img-registration;
 	display: none;
 	visibility: false;
 }
@@ -399,6 +408,8 @@ fieldset {
 	width: @width-elem-registration;
 	height: @height-input;
 	line-height: @line-height__in-form;
+	.font-login(@color-auth, @font-tahoma, @font-size-tahoma,
+		@font-weight-tahoma);
 }
 
 .registration-error {
@@ -406,14 +417,11 @@ fieldset {
 	border-radius: 10px;
 	background-color: #FF6570FF;
 	text-align: center;
+	// width:~"calc(@{width-form-registration} + @{height-img-registration} + @{padding-img-registration})";
+	width: @width-form-registration;
 }
 
 .button-color1 {
 	background-color: lighten(@color-button-sign-in, 40%);
 	color: darken(@color-form, 50%);
-}
-
-.button-visible {
-	display: none;
-	visibility: false;
 }
