@@ -397,6 +397,8 @@ fieldset {
 
 .lbl__elem {
 	width: @width-elem-registration;
+	height: @height-input;
+	line-height: @line-height__in-form;
 }
 
 .registration-error {
@@ -406,7 +408,12 @@ fieldset {
 	text-align: center;
 }
 
-.buutton-color:disabled {
+.button-color1 {
 	background-color: lighten(@color-button-sign-in, 40%);
 	color: darken(@color-form, 50%);
+}
+
+.button-visible {
+	display: none;
+	visibility: false;
 }
