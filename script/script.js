@@ -78,6 +78,7 @@ function UpdateStatusTaskInDB(taskText)
 {
   GetStatusTaskInDB(taskText);
   //alert(statusTask);
+  alert("update");
   if(statusTask == 0)
   {
     statusTask = 1;
@@ -123,7 +124,7 @@ function GetStatusTaskInDB(taskText)
     else 
     {
       var line = xmlhttp.responseText;
-      alert("statusTask was: "+line)
+      //alert("statusTask was: "+line)
       statusTask = line;
     }
   }
