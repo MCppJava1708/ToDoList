@@ -16,7 +16,6 @@ var sendError	 = document.getElementById('sendError');
 var loginError   = document.getElementById('loginError');
 var emailError   = document.getElementById('emailError');
 var passError    = document.getElementById('passError');
-var pass2Error   = document.getElementById('pass2Error');
 var xhr          = new XMLHttpRequest();
 var sendFlag	 = false;
 var nameOK       = false;
@@ -88,7 +87,7 @@ function checkPass ()
 	else
 	{
 		passOK = false;
-		passError.innerHTML = str;
+		passError.innerHTML = "Password 1:" + str;
 		styleCorrection (imgPassOK1, imgPassFail1);
 	}
 }
@@ -117,7 +116,7 @@ function checkPass2 ()
 	else
 	{
 		pass2OK = false;
-		pass2Error.innerHTML = str;
+		pass2Error.innerHTML = "Password 2:" + str;
 		styleCorrection (imgPassOK2, imgPassFail2);
 	}
 }

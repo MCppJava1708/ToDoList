@@ -416,11 +416,19 @@ fieldset {
 	border-radius: 10px;
 	background-color: #FF6570FF;
 	text-align: center;
-	// width:~"calc(@{width-form-registration} + @{height-img-registration} + @{padding-img-registration})";
 	width: @width-form-registration;
 }
 
 .button-color1 {
 	background-color: lighten(@color-button-sign-in, 40%);
 	color: darken(@color-form, 50%);
+}
+
+//////////////////////////////////////
+//////////// PASSWORD ////////////////
+//////////////////////////////////////
+
+#keyForm {
+	display: none;
+	visibility: false;
 }
