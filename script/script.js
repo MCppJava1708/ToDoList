@@ -2,7 +2,6 @@ var tasks = [];
 var xmlhttp = new XMLHttpRequest();
 var taskUl = document.getElementById('taskUl');
 var taskTextInput = document.getElementById('taskInput');
-var addBton = document.getElementById("addBton");
 
 var id;
 var name = "H";
@@ -15,7 +14,7 @@ var statusTask = 1;
 // Создайте новый элемент списка, нажав кнопку «Добавить»
 /////////////////////////////////////////////////////////
 
-addBton.onclick = function newElement() 
+document.getElementById("addBton").onclick = function newElement() 
 {
   xmlhttp.onreadystatechange = conn;
   str = "'"+ name + "','"+ taskTextInput.value + "'," + 1;
@@ -49,7 +48,7 @@ addBton.onclick = function newElement()
 //Добавьте символ «checked» (перечеркнуть строку), когда вы нажимаете на 
 //элемент списка) и удаление при нажатии на delete
 
-var list = taskUl;
+var list = document.getElementById("taskUl");
 list.addEventListener('click', function(ev) 
 {
   if (ev.target.tagName === 'LI')  
@@ -57,7 +56,6 @@ list.addEventListener('click', function(ev)
     //ev.target.classList.toggle('checked');
     var str = ev.target.innerText;
     taskText = str.substring(0,str.indexOf(" "));
-    alert("достаем таск"+taskText);
     UpdateStatusTaskInDB(taskText);
     
   }
@@ -65,7 +63,6 @@ list.addEventListener('click', function(ev)
   {
     var str = ev.target.parentElement.innerText;
     taskText = str.substring(0,str.indexOf(" "));
-    alert("достаем таск"+taskText);
     dellFromDbTask(taskText);
     
   }
@@ -177,7 +174,7 @@ function Task (id, name, taskText, statusTask) {
 
 function readDb(login) 
 {
-  taskUl.innerHTML = '';
+  document.getElementById('taskUl').innerHTML = '';
 
   xmlhttp.open("GET", "php/readTask.php?name=" + login, true);
   xmlhttp.send();
@@ -230,7 +227,7 @@ function conn()
 
 function createTask(task){
   var newLi = document.createElement('li');  
-  taskText = task.taskText ;
+  var taskText = task.taskText ;
   var t = document.createTextNode(taskText);
   newLi.appendChild(t);
   
@@ -241,11 +238,11 @@ function createTask(task){
   taskUl.appendChild(newLi);
 
   //Создаем кнопку "close" и добавляем ее в <li>
-  var button = document.createElement("button");
-  var txt = document.createTextNode("\u00D7");
-  button.className = "close";
-  button.appendChild(txt);
-  newLi.appendChild(button);
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode(" \u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  newLi.appendChild(span);
 }
 
 /////////////////////////////////////////////////////////
