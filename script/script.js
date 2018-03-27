@@ -2,6 +2,7 @@ var tasks = [];
 var xmlhttp = new XMLHttpRequest();
 var taskUl = document.getElementById('taskUl');
 var taskTextInput = document.getElementById('taskInput');
+var addBton = document.getElementById("addBton");
 
 var id;
 var name = "H";
@@ -14,7 +15,7 @@ var statusTask = 1;
 // Создайте новый элемент списка, нажав кнопку «Добавить»
 /////////////////////////////////////////////////////////
 
-document.getElementById("addBton").onclick = function newElement() 
+addBton.onclick = function newElement() 
 {
   xmlhttp.onreadystatechange = conn;
   str = "'"+ name + "','"+ taskTextInput.value + "'," + 1;
@@ -48,7 +49,7 @@ document.getElementById("addBton").onclick = function newElement()
 //Добавьте символ «checked» (перечеркнуть строку), когда вы нажимаете на 
 //элемент списка) и удаление при нажатии на delete
 
-var list = document.getElementById("taskUl");
+var list = taskUl;
 list.addEventListener('click', function(ev) 
 {
   if (ev.target.tagName === 'LI')  
@@ -174,7 +175,7 @@ function Task (id, name, taskText, statusTask) {
 
 function readDb(login) 
 {
-  document.getElementById('taskUl').innerHTML = '';
+  taskUl.innerHTML = '';
 
   xmlhttp.open("GET", "php/readTask.php?name=" + login, true);
   xmlhttp.send();
@@ -227,7 +228,7 @@ function conn()
 
 function createTask(task){
   var newLi = document.createElement('li');  
-  var taskText = task.taskText ;
+  taskText = task.taskText ;
   var t = document.createTextNode(taskText);
   newLi.appendChild(t);
   
