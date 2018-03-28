@@ -124,7 +124,7 @@ function checkPass2 ()
 function checkKey ()
 {
 	keyVal = key.value;
-	if (keyVal = "" || keyVal.search(/\D/) != -1 || keyVal < 1000 || keyVal > 99999999)
+	if (keyVal == "" || keyVal.search(/\D/) != -1 || keyVal < 1000 || keyVal > 99999999)
 	{
 		styleCorrection (imgKeyOK, imgKeyFail);
 		keyError.innerHTML = "Key is incorrect";
@@ -177,8 +177,6 @@ function receive ()
 		var res = xhr.responseText;
 		if (res >= 0 && res <= 3)
 		{
-			console.log (res);
-
 			switch (res)
 			{
 			case "0":
@@ -217,10 +215,9 @@ function receive ()
 		}
 		else if (res >= 1000)
 		{
-			keyVal = res;
 			emailOK = false;
 			styleCorrection (document.getElementById('emailForm'), document.getElementById('keyForm'));
-			console.log (keyVal);
+			console.log (res);
 		}
 		else
 		{
