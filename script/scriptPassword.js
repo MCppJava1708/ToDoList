@@ -1,45 +1,51 @@
 var email 		 = document.getElementById('email');
-// var pass         = document.getElementById('pass');
-// var pass2        = document.getElementById('pass2');
+var pass         = document.getElementById('pass');
+var pass2        = document.getElementById('pass2');
+var key 		 = document.getElementById('key');
 var imgEmailOk   = document.getElementById('imgEmailOk');
 var imgEmailFail = document.getElementById('imgEmailFail');
-// var imgPassOK1   = document.getElementById('imgPassOK1');
-// var imgPassFail1 = document.getElementById('imgPassFail1');
-// var imgPassOK2   = document.getElementById('imgPassOK2');
-// var imgPassFail2 = document.getElementById('imgPassFail2');
-// var pass2Error   = document.getElementById('pass2Error');
-// var btnsend      = document.getElementById('btnsend');
+var imgPassOK1   = document.getElementById('imgPassOK1');
+var imgPassFail1 = document.getElementById('imgPassFail1');
+var imgPassOK2   = document.getElementById('imgPassOK2');
+var imgPassFail2 = document.getElementById('imgPassFail2');
+var imgKeyOK	 = document.getElementById('imgKeyOK');
+var imgKeyFail	 = document.getElementById('imgKeyFail');
+var btnsend      = document.getElementById('btnsend');
 var btnget		 = document.getElementById('btnget');
 var sendError	 = document.getElementById('sendError');
 var emailError   = document.getElementById('emailError');
-// var passError    = document.getElementById('passError');
+var passError    = document.getElementById('passError');
+var pass2Error   = document.getElementById('pass2Error');
+var keyError	 = document.getElementById('keyError');
 var xhr          = new XMLHttpRequest();
 var sendFlag	 = false;
-// var nameOK       = false;
 var emailOK      = false;
-// var passOK       = false;
-// var pass2OK      = false;
-
-// btnsend.onclick = checkBtn;
+var passOK       = false;
+var pass2OK      = false;
+var keyOK		 = false;
+var emailVal;
+var keyVal;
+//btnsend.onclick = checkBtn;
 email.onblur    = checkEmail;
 btnget.onclick	= checkBtnGet;
-// pass.onblur		= checkPass;
-// pass2.onblur	= checkPass2;
+pass.onblur		= checkPass;
+pass2.onblur	= checkPass2;
+key.onblur		= checkKey;
 
 function checkEmail ()
 {
-	var val = email.value;
-	if (val == "")
+	emailVal = email.value;
+	if (emailVal == "")
 		return;
 
-	if (val.search( /^([a-zA-Z][\w\.-]*)@([\w\.-]+)\.([\w\.]{2,6})$/) == -1)
+	if (emailVal.search( /^([a-zA-Z][\w\.-]*)@([\w\.-]+)\.([\w\.]{2,6})$/) == -1)
 	{
 		emailOK = false;
 		emailError.innerHTML = "Email format is incorrect";
 		styleCorrection (imgEmailOk, imgEmailFail);
 		return;
 	}
-	var sendStr = "&email=" + email.value;
+	var sendStr = "&email=" + emailVal;
 	send (sendStr, "php/passwordCheck.php");
 }
 
@@ -47,116 +53,108 @@ function checkBtnGet ()
 {
 	if (emailOK)
 	{
-		var sendStr = "&email=" + email.value;
+		var sendStr = "&email=" + emailVal;
 		send (sendStr, "php/password.php");
+	}
+	else
+	{
+		sendFlag = true;
+		checkEmail ();
 	}
 }
 
-// function checkPass () 
-// {
-// 	strpass  = pass.value;
-// 	if (strpass == "")
-// 		return;
+function checkPass () 
+{
+	strpass  = pass.value;
+	if (strpass == "")
+		return;
 	
-// 	strpass2 = pass2.value;
-// 	str      = passwordCheck (strpass, strpass2);
-// 	if (str == "OK")
-// 	{
-// 		passOK = true;
-// 		if (strpass2 == strpass)
-// 		{
-// 			pass2OK = true;
-// 			pass2Error.innerHTML = "";
-// 			styleCorrection (imgPassFail2, imgPassOK2);	
-// 		}
+	strpass2 = pass2.value;
+	str      = passwordCheck (strpass, strpass2);
+	if (str == "OK")
+	{
+		passOK = true;
+		if (strpass2 == strpass)
+		{
+			pass2OK = true;
+			pass2Error.innerHTML = "";
+			styleCorrection (imgPassFail2, imgPassOK2);	
+		}
 
-// 		passError.innerHTML = "";
-// 		styleCorrection (imgPassFail1, imgPassOK1);	
-// 	}
-// 	else
-// 	{
-// 		passOK = false;
-// 		passError.innerHTML = "Password 1:" + str;
-// 		styleCorrection (imgPassOK1, imgPassFail1);
-// 	}
-// }
+		passError.innerHTML = "";
+		styleCorrection (imgPassFail1, imgPassOK1);	
+	}
+	else
+	{
+		passOK = false;
+		passError.innerHTML = "Password 1:" + str;
+		styleCorrection (imgPassOK1, imgPassFail1);
+	}
+}
 
-// function checkPass2 () 
-// {
-// 	strpass2 = pass2.value;
-// 	if (strpass2 == "")
-// 		return;
+function checkPass2 () 
+{
+	strpass2 = pass2.value;
+	if (strpass2 == "")
+		return;
 
-// 	strpass  = pass.value;
-// 	str = passwordCheck (strpass2, strpass);
-// 	if (str == "OK")
-// 	{
-// 		pass2OK = true;
-// 		if (strpass2 == strpass)
-// 		{
-// 			passOK = true;
-// 			passError.innerHTML = "";
-// 			styleCorrection (imgPassFail1, imgPassOK1);	
-// 		}
+	strpass  = pass.value;
+	str = passwordCheck (strpass2, strpass);
+	if (str == "OK")
+	{
+		pass2OK = true;
+		if (strpass2 == strpass)
+		{
+			passOK = true;
+			passError.innerHTML = "";
+			styleCorrection (imgPassFail1, imgPassOK1);	
+		}
 
-// 		pass2Error.innerHTML = "";
-// 		styleCorrection (imgPassFail2, imgPassOK2);
-// 	}
-// 	else
-// 	{
-// 		pass2OK = false;
-// 		pass2Error.innerHTML = "Password 2:" + str;
-// 		styleCorrection (imgPassOK2, imgPassFail2);
-// 	}
-// }
+		pass2Error.innerHTML = "";
+		styleCorrection (imgPassFail2, imgPassOK2);
+	}
+	else
+	{
+		pass2OK = false;
+		pass2Error.innerHTML = "Password 2:" + str;
+		styleCorrection (imgPassOK2, imgPassFail2);
+	}
+}
 
-// function sendLogin ()
-// {
-// 	var sendStr = "login=" + login.value + "&email=" + email.value + "&pass=" + pass.value;
-// 	send (sendStr, "php/register.php");
-// }
+function checkKey ()
+{
+	keyVal = key.value;
+	if (keyVal = "" || keyVal.search(/\D/) != -1 || keyVal < 1000 || keyVal > 99999999)
+	{
+		styleCorrection (imgKeyOK, imgKeyFail);
+		keyError.innerHTML = "Key is incorrect";
+	}
+	else
+	{
+		var sendStr = "&key=" + keyVal + "&email=" + emailVal;
+		send (sendStr, "php/passwordCheck.php");
+	}
+}
 
-// function passwordCheck (strpass, strpass2) 
-// {
-// 	if (strpass.length < 8)
-// 		return "The password must be at least 8 symbols";
+function passwordCheck (strpass, strpass2) 
+{
+	if (strpass.length < 8)
+		return "The password must be at least 8 symbols";
 
-// 	if (strpass.search(/\W/) != -1)
-// 		return "Uncorrect symbol in password";
+	if (strpass.search(/\W/) != -1)
+		return "Uncorrect symbol in password";
 
-// 	if (strpass.search(/\d/) == -1)
-// 		return "Password must include at least 1 number";
+	if (strpass.search(/\d/) == -1)
+		return "Password must include at least 1 number";
 	
-// 	if (strpass.search(/[a-zA-Z]/) == -1)
-// 		return "Password must include at least 1 latin letter";
+	if (strpass.search(/[a-zA-Z]/) == -1)
+		return "Password must include at least 1 latin letter";
 	
-// 	if (strpass2 != "" && strpass2 != strpass)
-// 		return "Password 1 must equals to password 2";
+	if (strpass2 != "" && strpass2 != strpass)
+		return "Password 1 must equals to password 2";
 				
-// 	return "OK";
-// }
-
-// function checkBtn ()
-// {
-// 	if (nameOK && emailOK && passOK && pass2OK)
-// 		sendLogin ();
-
-// 	sendFlag = true;
-// 	if (nameOK && emailOK && passOK)
-// 		checkPass2();
-// 	else if (nameOK && emailOK && pass2OK)
-// 		checkPass();
-// 	else if (nameOK && passOK && pass2OK)
-// 		checkEmail();
-// 	else if (emailOK && passOK && pass2OK)
-// 		checkLogin();
-// 	else
-// 	{
-// 		sendFlag = false;
-// 		sendError.innerHTML = "Please check that correction of field filling";
-// 		setTimeout(function(){sendError.innerHTML = ""}, 4000);
-// 	}
-// }
+	return "OK";
+}
 
 function send (sendStr, host)
 {
@@ -177,8 +175,10 @@ function receive ()
 	else 
 	{
 		var res = xhr.responseText;
-		if (res >= 0 && res <= 1)
+		if (res >= 0 && res <= 3)
 		{
+			console.log (res);
+
 			switch (res)
 			{
 			case "0":
@@ -191,10 +191,42 @@ function receive ()
 				emailError.innerHTML = "Input email is absent in data base";
 				styleCorrection (imgEmailOk, imgEmailFail);
 				break;
+			case "2":
+				keyOK = true;
+				keyError.innerHTML = "";
+				styleCorrection (imgKeyFail, imgKeyOK);
+				break;
+			case "3":
+				keyOK = false;
+				keyError.innerHTML = "Input key is incorrect. Password could not be changed.";
+				styleCorrection (imgKeyOK, imgKeyFail);
+				break;
+			}
+
+			if (sendFlag)
+			{
+				if (emailOK)
+					send (sendStr, "php/password.php");
+				else
+				{
+					sendError.innerHTML = "Please check the correction of field filling";
+					sendFlag = false;
+					setTimeout(function(){sendError.innerHTML = ""}, 4000);
+				}
 			}
 		}
+		else if (res >= 1000)
+		{
+			keyVal = res;
+			emailOK = false;
+			styleCorrection (document.getElementById('emailForm'), document.getElementById('keyForm'));
+			console.log (keyVal);
+		}
 		else
+		{
+			console.log (res);
 			alert ("Reqest error");
+		}
 	}
 }
 
@@ -210,9 +242,4 @@ function styleCorrection (hidd, show)
 		btnget.style.backgroundColor = "rgb(102, 233, 21)";
 		btnget.style.color = 'white';
 	}
-	// if (nameOK && emailOK && passOK && pass2OK)
-	// {
-	// 	btnsend.style.backgroundColor = "rgb(102, 233, 21)";
-	// 	btnsend.style.color = 'white';
-	// }
 }
