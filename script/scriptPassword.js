@@ -25,7 +25,8 @@ var pass2OK      = false;
 var keyOK		 = false;
 var emailVal;
 var keyVal;
-//btnsend.onclick = checkBtn;
+
+btnsend.onclick = checkBtnSend;
 email.onblur    = checkEmail;
 btnget.onclick	= checkBtnGet;
 pass.onblur		= checkPass;
@@ -124,7 +125,10 @@ function checkPass2 ()
 function checkKey ()
 {
 	keyVal = key.value;
-	if (keyVal == "" || keyVal.search(/\D/) != -1 || keyVal < 1000 || keyVal > 99999999)
+	if (keyVal == "")
+		return;
+
+	if (keyVal.search(/\D/) != -1 || keyVal < 1000 || keyVal > 99999999)
 	{
 		styleCorrection (imgKeyOK, imgKeyFail);
 		keyError.innerHTML = "Key is incorrect";
@@ -133,6 +137,35 @@ function checkKey ()
 	{
 		var sendStr = "&key=" + keyVal + "&email=" + emailVal;
 		send (sendStr, "php/passwordCheck.php");
+	}
+}
+
+function checkBtnSend ()
+{
+	if (keyOK && passOK && pass2OK)
+	{
+		var sendStr = "&pass=" + pass.value + "&email=" + emailVal;
+		send (sendStr, "php/password.php");
+	}
+	else if (keyOK && passOK)
+	{
+		sendFlag = true;
+		checkPass2();
+	}
+	else if (keyOK && pass2OK)
+	{
+		sendFlag = true;
+		checkPass();	
+	}
+	else if (passOK && pass2OK)
+	{
+		sendFlag = true;
+		checkKey ();
+	}
+	else
+	{
+		sendError.innerHTML = "Please check the correction of field filling";
+		setTimeout(function(){sendError.innerHTML = ""}, 4000);
 	}
 }
 
@@ -175,7 +208,7 @@ function receive ()
 	else 
 	{
 		var res = xhr.responseText;
-		if (res >= 0 && res <= 3)
+		if (res >= 0 && res <= 4)
 		{
 			switch (res)
 			{
@@ -196,25 +229,18 @@ function receive ()
 				break;
 			case "3":
 				keyOK = false;
-				keyError.innerHTML = "Input key is incorrect. Password could not be changed.";
+				keyError.innerHTML = "Input key is incorrect";
 				styleCorrection (imgKeyOK, imgKeyFail);
 				break;
-			}
-
-			if (sendFlag)
-			{
-				if (emailOK)
-					send (sendStr, "php/password.php");
-				else
-				{
-					sendError.innerHTML = "Please check the correction of field filling";
-					sendFlag = false;
-					setTimeout(function(){sendError.innerHTML = ""}, 4000);
-				}
+			case "4":
+				document.getElementById('passChange').innerHTML = "Your password was changed. Please login with a new password";
+				setTimeout(function(){document.location.href = "login.html"}, 5000);
+				break;
 			}
 		}
 		else if (res >= 1000)
 		{
+			sendFlag = false;
 			emailOK = false;
 			styleCorrection (document.getElementById('emailForm'), document.getElementById('keyForm'));
 			console.log (res);
@@ -238,5 +264,30 @@ function styleCorrection (hidd, show)
 	{
 		btnget.style.backgroundColor = "rgb(102, 233, 21)";
 		btnget.style.color = 'white';
+	}
+	else if (keyOK && passOK && pass2OK)
+	{
+		btnsend.style.backgroundColor = "rgb(102, 233, 21)";
+		btnsend.style.color = 'white';
+	}
+
+	if (sendFlag)
+	{
+		sendFlag = false;
+		if (emailOK)
+		{
+			var sendStr = "&email=" + emailVal;
+			send (sendStr, "php/password.php");
+		}
+		else if (keyOK && passOK && pass2OK)
+		{
+			var sendStr = "&pass=" + pass.value + "&email=" + emailVal;
+			send (sendStr, "php/password.php");
+		}
+		else
+		{
+			sendError.innerHTML = "Please check the correction of field filling";
+			setTimeout(function(){sendError.innerHTML = ""}, 4000);
+		}
 	}
 }
