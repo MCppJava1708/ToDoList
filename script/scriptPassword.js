@@ -1,66 +1,67 @@
-var login 		 = document.getElementById('login');
 var email 		 = document.getElementById('email');
 var pass         = document.getElementById('pass');
 var pass2        = document.getElementById('pass2');
-var imgLoginOk   = document.getElementById('imgLoginOk');
-var imgLoginFail = document.getElementById('imgLoginFail');
+var key 		 = document.getElementById('key');
 var imgEmailOk   = document.getElementById('imgEmailOk');
 var imgEmailFail = document.getElementById('imgEmailFail');
 var imgPassOK1   = document.getElementById('imgPassOK1');
 var imgPassFail1 = document.getElementById('imgPassFail1');
 var imgPassOK2   = document.getElementById('imgPassOK2');
 var imgPassFail2 = document.getElementById('imgPassFail2');
-var pass2Error   = document.getElementById('pass2Error');
+var imgKeyOK	 = document.getElementById('imgKeyOK');
+var imgKeyFail	 = document.getElementById('imgKeyFail');
 var btnsend      = document.getElementById('btnsend');
+var btnget		 = document.getElementById('btnget');
 var sendError	 = document.getElementById('sendError');
-var loginError   = document.getElementById('loginError');
 var emailError   = document.getElementById('emailError');
 var passError    = document.getElementById('passError');
+var pass2Error   = document.getElementById('pass2Error');
+var keyError	 = document.getElementById('keyError');
 var xhr          = new XMLHttpRequest();
 var sendFlag	 = false;
-var nameOK       = false;
 var emailOK      = false;
 var passOK       = false;
 var pass2OK      = false;
+var keyOK		 = false;
+var emailVal;
+var keyVal;
 
-btnsend.onclick = checkBtn;
-login.onblur    = checkLogin;
+btnsend.onclick = checkBtnSend;
 email.onblur    = checkEmail;
+btnget.onclick	= checkBtnGet;
 pass.onblur		= checkPass;
 pass2.onblur	= checkPass2;
-
-function checkLogin ()
-{
-	var val = login.value;
-	if (val == "")
-		return;
-
-	if (val.search(/\W/) != -1)
-	{
-		nameOK = false;
-		loginError.innerHTML = "Incorrect symbol in login";
-		styleCorrection (imgLoginOk, imgLoginFail);
-		return;
-	}
-	var sendStr = "&login=" + val;
-	send (sendStr, "php/registerCheck.php");
-}
+key.onblur		= checkKey;
 
 function checkEmail ()
 {
-	var val = email.value;
-	if (val == "")
+	emailVal = email.value;
+	if (emailVal == "")
 		return;
 
-	if (val.search( /^([a-zA-Z][\w\.-]*)@([\w\.-]+)\.([\w\.]{2,6})$/) == -1)
+	if (emailVal.search( /^([a-zA-Z][\w\.-]*)@([\w\.-]+)\.([\w\.]{2,6})$/) == -1)
 	{
 		emailOK = false;
 		emailError.innerHTML = "Email format is incorrect";
 		styleCorrection (imgEmailOk, imgEmailFail);
 		return;
 	}
-	var sendStr = "&email=" + email.value;
-	send (sendStr, "php/registerCheck.php");
+	var sendStr = "&email=" + emailVal;
+	send (sendStr, "php/passwordCheck.php");
+}
+
+function checkBtnGet ()
+{
+	if (emailOK)
+	{
+		var sendStr = "&email=" + emailVal;
+		send (sendStr, "php/password.php");
+	}
+	else
+	{
+		sendFlag = true;
+		checkEmail ();
+	}
 }
 
 function checkPass () 
@@ -121,10 +122,51 @@ function checkPass2 ()
 	}
 }
 
-function sendLogin ()
+function checkKey ()
 {
-	var sendStr = "login=" + login.value + "&email=" + email.value + "&pass=" + pass.value;
-	send (sendStr, "php/register.php");
+	keyVal = key.value;
+	if (keyVal == "")
+		return;
+
+	if (keyVal.search(/\D/) != -1 || keyVal < 1000 || keyVal > 99999999)
+	{
+		styleCorrection (imgKeyOK, imgKeyFail);
+		keyError.innerHTML = "Key is incorrect";
+	}
+	else
+	{
+		var sendStr = "&key=" + keyVal + "&email=" + emailVal;
+		send (sendStr, "php/passwordCheck.php");
+	}
+}
+
+function checkBtnSend ()
+{
+	if (keyOK && passOK && pass2OK)
+	{
+		var sendStr = "&pass=" + pass.value + "&email=" + emailVal;
+		send (sendStr, "php/password.php");
+	}
+	else if (keyOK && passOK)
+	{
+		sendFlag = true;
+		checkPass2();
+	}
+	else if (keyOK && pass2OK)
+	{
+		sendFlag = true;
+		checkPass();	
+	}
+	else if (passOK && pass2OK)
+	{
+		sendFlag = true;
+		checkKey ();
+	}
+	else
+	{
+		sendError.innerHTML = "Please check the correction of field filling";
+		setTimeout(function(){sendError.innerHTML = ""}, 4000);
+	}
 }
 
 function passwordCheck (strpass, strpass2) 
@@ -147,28 +189,6 @@ function passwordCheck (strpass, strpass2)
 	return "OK";
 }
 
-function checkBtn ()
-{
-	if (nameOK && emailOK && passOK && pass2OK)
-		sendLogin ();
-
-	sendFlag = true;
-	if (nameOK && emailOK && passOK)
-		checkPass2();
-	else if (nameOK && emailOK && pass2OK)
-		checkPass();
-	else if (nameOK && passOK && pass2OK)
-		checkEmail();
-	else if (emailOK && passOK && pass2OK)
-		checkLogin();
-	else
-	{
-		sendFlag = false;
-		sendError.innerHTML = "Please check that correction of field filling";
-		setTimeout(function(){sendError.innerHTML = ""}, 4000);
-	}
-}
-
 function send (sendStr, host)
 {
 	xhr.onreadystatechange = receive;
@@ -188,48 +208,48 @@ function receive ()
 	else 
 	{
 		var res = xhr.responseText;
-		if (res >= 0 && res <= 3)
+		if (res >= 0 && res <= 4)
 		{
 			switch (res)
 			{
 			case "0":
-				nameOK = true;
-				loginError.innerHTML = "";
-				styleCorrection (imgLoginFail, imgLoginOk);
-				break;
-			case "1":
-				nameOK = false;
-				loginError.innerHTML = "Selected login is alredy used. Please select other login.";
-				styleCorrection (imgLoginOk, imgLoginFail);
-				break;
-			case "2":
 				emailOK = true;
 				emailError.innerHTML = "";
 				styleCorrection (imgEmailFail, imgEmailOk);
 				break;
-			case "3":
+			case "1":
 				emailOK = false;
-				emailError.innerHTML = "Selected email is alredy used. Please select other email.";
+				emailError.innerHTML = "Input email is absent in data base";
 				styleCorrection (imgEmailOk, imgEmailFail);
 				break;
-
-				if (sendFlag)
-				{
-					if (nameOK && emailOK && passOK && pass2OK)
-						sendLogin ();
-					else
-					{
-						sendError.innerHTML = "Please check that correction of field filling";
-						sendFlag = false;
-						setTimeout(function(){sendError.innerHTML = ""}, 4000);
-					}
-				}
+			case "2":
+				keyOK = true;
+				keyError.innerHTML = "";
+				styleCorrection (imgKeyFail, imgKeyOK);
+				break;
+			case "3":
+				keyOK = false;
+				keyError.innerHTML = "Input key is incorrect";
+				styleCorrection (imgKeyOK, imgKeyFail);
+				break;
+			case "4":
+				document.getElementById('passChange').innerHTML = "Your password was changed. Please login with a new password";
+				setTimeout(function(){document.location.href = "login.html"}, 5000);
+				break;
 			}
 		}
-		else if (res == 4)
-			document.location.href = "index.html?login=" + login.value;
+		else if (res >= 1000)
+		{
+			sendFlag = false;
+			emailOK = false;
+			styleCorrection (document.getElementById('emailForm'), document.getElementById('keyForm'));
+			console.log (res);
+		}
 		else
+		{
+			console.log (res);
 			alert ("Reqest error");
+		}
 	}
 }
 
@@ -240,9 +260,34 @@ function styleCorrection (hidd, show)
 	show.style.display = 'inline';
 	show.style.visible = true;
 
-	if (nameOK && emailOK && passOK && pass2OK)
+	if (emailOK)
+	{
+		btnget.style.backgroundColor = "rgb(102, 233, 21)";
+		btnget.style.color = 'white';
+	}
+	else if (keyOK && passOK && pass2OK)
 	{
 		btnsend.style.backgroundColor = "rgb(102, 233, 21)";
 		btnsend.style.color = 'white';
+	}
+
+	if (sendFlag)
+	{
+		sendFlag = false;
+		if (emailOK)
+		{
+			var sendStr = "&email=" + emailVal;
+			send (sendStr, "php/password.php");
+		}
+		else if (keyOK && passOK && pass2OK)
+		{
+			var sendStr = "&pass=" + pass.value + "&email=" + emailVal;
+			send (sendStr, "php/password.php");
+		}
+		else
+		{
+			sendError.innerHTML = "Please check the correction of field filling";
+			setTimeout(function(){sendError.innerHTML = ""}, 4000);
+		}
 	}
 }
