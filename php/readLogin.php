@@ -1,5 +1,6 @@
 <?php
 $name = $_GET['name'];
+$pass = $_GET['pass'];
 $host='localhost';
 $database='todolistdb';
 $user='root';
@@ -22,11 +23,16 @@ if($result)
 {
 	$row = mysqli_fetch_row($result);
 	for ($j = 0 ; $j < 4 ; ++$j){
-		$str.= $row[$j] . " ";
+			if ($row[$j] == $name) {
+				$str .= 'true' . " ";
+			} 
+			if ($row[$j] == $pass) {
+				$str .= 'true' . " ";
+			}
 	} 
 	$encrypted = base64_encode(
-	mcrypt_encrypt(MCRYPT_RIJNDAEL_256,
-	$key, $str, MCRYPT_MODE_CBC, $iv));
+		mcrypt_encrypt(MCRYPT_RIJNDAEL_256,
+			$key, $str, MCRYPT_MODE_CBC, $iv));
 	echo $encrypted;
 	mysqli_free_result($result);
 }

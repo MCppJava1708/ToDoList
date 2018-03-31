@@ -16,25 +16,21 @@ function Login (userNameOrEmail, password) {
 	this.password = password;
 }
 
-Login.prototype.cheackUser = function(users) {
-	if (users.login === this.userNameOrEmail &&
-		users.password === this.password) {
-		doc.location.href = "index.html?login=" + users.login;
-} else if (users.email === this.userNameOrEmail &&
-	users.password === this.password) {
-	doc.location.href = "index.html?login="+ users.login;
-}else {
-	shapeError();
-}
+Login.prototype.cheackUser = function(name, pass) {
+	if (name === 'true' && pass === 'true') {
+		doc.location.href = "index.html?login=" + this.userNameOrEmail;
+	} else {
+		shapeError();
+	}
 }
 
 Login.prototype.loginRex = function(){
 	if (this.userNameOrEmail.search(/^[a-zA-Z0-9_-]{3,16}$/) !=-1 &&
 		this.password.search(/^[a-z0-9_-]{6,18}$/) !=-1) {
-		readPHPCon(lgn.userNameOrEmail);
+		readPHPCon(lgn.userNameOrEmail, lgn.password);
 } else if (this.userNameOrEmail.search( /^([a-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z\.]{2,6})$/) !=-1 &&
 	this.password.search(/^[a-z0-9_-]{6,18}$/) !=-1) {
-	readPHPCon(lgn.userNameOrEmail);
+	readPHPCon(lgn.userNameOrEmail, lgn.password);
 } else {
  		shapeError();
 }
@@ -71,9 +67,10 @@ function shapeError () {
 /////////// Server Read Users //////////////
 ///////////////////////////////////////////
 
-function readPHPCon(login) {
+function readPHPCon(login, pass) {
 	xmlhttp.onreadystatechange = conn;
-	xmlhttp.open("GET", "php/readLogin.php?name=" + login, true);
+	console.log(login, pass);
+	xmlhttp.open("GET", "php/readLogin.php?name=" + login + "&pass=" + pass, true);
 	xmlhttp.send();
 }
 
@@ -85,6 +82,7 @@ function conn() {
 		console.log(xmlhttp.status + ': ' + xmlhttp.statusText);
 	} else {
 		line = xmlhttp.responseText;
+		console.log(line);
 		deCrypt(line);
 	}
 }
@@ -97,30 +95,18 @@ function deCrypt (encrypted) {
 	var arrLine=[];
 	arrLine = decrypted.split(" ");
 	var count = 0;
-	var id;
-	var login;
-	var email;
+	var name;
 	var pass;
 	for (var i = 0; i < arrLine.length; i++) {
 		console.log(arrLine[i]);
 		switch (count) {
 			case 0:
-			id = arrLine[i];
+			name = arrLine[i];
 			count++;
 			break;
 			case 1:
-			login = arrLine[i];
-			count++;
-			break;
-			case 2:
-			email = arrLine[i];
-			count++;
-			break;
-			case 3:
 			pass = arrLine[i];
-			var user = new User(id, login, email, pass);
-			console.log(user);
-			lgn.cheackUser(user);
+			lgn.cheackUser(name, pass);
 			count = 0;
 			break;
 		}
