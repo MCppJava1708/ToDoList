@@ -434,7 +434,6 @@ fieldset {
 	border-radius: 10px;
 	background-color: #FF6570FF;
 	text-align: center;
-	// width:~"calc(@{width-form-registration} + @{height-img-registration} + @{padding-img-registration})";
 	width: @width-form-registration;
 }
 
@@ -442,3 +441,20 @@ fieldset {
 	background-color: lighten(@color-button-sign-in, 40%);
 	color: darken(@color-form, 50%);
 }
+
+//////////////////////////////////////
+//////////// PASSWORD ////////////////
+//////////////////////////////////////
+
+.password-changed {
+	background-color: @color-password-changed;
+	color: @color-form;
+	border-radius: 10px;
+	text-align: center;
+}
+
+#keyForm {
+	display: none;
+	visibility: false;
+}
+
