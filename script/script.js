@@ -56,14 +56,14 @@ list.addEventListener('click', function(ev)
   {
     //ev.target.classList.toggle('checked');
     var str = ev.target.innerText;
-    taskText = str.substring(0,str.indexOf(" "));
+    taskText = str.substring(0,str.indexOf("\u00D7"));
     UpdateStatusTaskInDB(taskText);
     
   }
   else if (ev.target.className === "close")
   {
     var str = ev.target.parentElement.innerText;
-    taskText = str.substring(0,str.indexOf(" "));
+    taskText = str.substring(0,str.indexOf("\u00D7"));
     dellFromDbTask(taskText);
     
   }
@@ -239,11 +239,11 @@ function createTask(task){
   taskUl.appendChild(newLi);
 
   //Создаем кнопку "close" и добавляем ее в <li>
-  var span = document.createElement("SPAN");
-  var txt = document.createTextNode(" \u00D7");
-  span.className = "close";
-  span.appendChild(txt);
-  newLi.appendChild(span);
+  var button = document.createElement("button");
+  var txt = document.createTextNode("\u00D7");
+  button.className = "close";
+  button.appendChild(txt);
+  newLi.appendChild(button);
 }
 
 /////////////////////////////////////////////////////////
