@@ -68,11 +68,6 @@ function shapeError () {
 ///////////////////////////////////////////
 
 function readPHPCon(login, pass) {
-	var key = 'd4b494e4502a62edd695a903a94c2701';
-	var iv = '02f30dffbb0d084755f438f7d8be4a7d';
-	var enc_str = mcrypt.Encrypt(btoa(login),iv,key,'rijndael-256','cbc');
-	console.log(enc_str);
-
 	xmlhttp.onreadystatechange = conn;
 	console.log(login, pass);
 	xmlhttp.open("GET", "php/readLogin.php?name=" + login + "&pass=" + pass, true);
