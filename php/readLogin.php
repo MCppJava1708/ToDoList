@@ -22,7 +22,7 @@ $result = mysqli_query($link, $query) or die("Ошибка " . mysqli_error($lin
 if($result)
 {
 	$row = mysqli_fetch_row($result);
-	for ($j = 0 ; $j < 4 ; ++$j){
+	for ($j = 0 ; $j < 5 ; ++$j){
 			if ($row[$j] == $name) {
 				$str .= 'true' . " ";
 			} 
