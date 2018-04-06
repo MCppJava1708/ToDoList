@@ -42,7 +42,7 @@ function checkLogin ()
 		styleCorrection (imgLoginOk, imgLoginFail);
 		return;
 	}
-	else if (val.length < 3 || val.length < 16)
+	else if (val.length < 3 || val.length > 16)
 	{
 		nameOK = false;
 		loginError.innerHTML = "The length of login must be in the range from 3 to 16";
