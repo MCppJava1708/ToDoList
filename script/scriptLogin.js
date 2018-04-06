@@ -69,9 +69,10 @@ function shapeError () {
 
 function readPHPCon(login, pass) {
 	xmlhttp.onreadystatechange = conn;
-	console.log(login, pass);
-	xmlhttp.open("GET", "php/readLogin.php?name=" + login + "&pass=" + pass, true);
-	xmlhttp.send();
+	var str = "name=" + login + "&pass=" + pass;
+	xmlhttp.open("POST", "php/readLogin.php", true);
+	xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	xmlhttp.send(str);
 }
 
 function conn() {
@@ -82,7 +83,6 @@ function conn() {
 		console.log(xmlhttp.status + ': ' + xmlhttp.statusText);
 	} else {
 		line = xmlhttp.responseText;
-		console.log(line);
 		deCrypt(line);
 	}
 }
@@ -94,7 +94,6 @@ function deCrypt (encrypted) {
 	var name;
 	var pass;
 	for (var i = 0; i < arrLine.length; i++) {
-		console.log(arrLine[i]);
 		switch (count) {
 			case 0:
 			name = arrLine[i];
