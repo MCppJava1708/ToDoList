@@ -194,7 +194,7 @@ function conn()
     line = xmlhttp.responseText;
 
     var arrLine=[];
-    arrLine = line.split(" ");
+    arrLine = line.split("%56-32,ddd;");
     var count = 0;
 
     for (var i = 0; i < arrLine.length; i++) {

@@ -171,8 +171,8 @@ function checkBtnSend ()
 
 function passwordCheck (strpass, strpass2) 
 {
-	if (strpass.length < 8)
-		return "The password must be at least 8 symbols";
+	if (strpass.length < 6 || strpass.length > 18)
+		return "The password length must be in the range from 6 to 18 symbols";
 
 	if (strpass.search(/\W/) != -1)
 		return "Uncorrect symbol in password";

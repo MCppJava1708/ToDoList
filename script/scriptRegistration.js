@@ -42,6 +42,13 @@ function checkLogin ()
 		styleCorrection (imgLoginOk, imgLoginFail);
 		return;
 	}
+	else if (val.length < 3 || val.length < 16)
+	{
+		nameOK = false;
+		loginError.innerHTML = "The length of login must be in the range from 3 to 16";
+		styleCorrection (imgLoginOk, imgLoginFail);
+		return;
+	}
 	var sendStr = "&login=" + val;
 	send (sendStr, "php/registerCheck.php");
 }
@@ -129,8 +136,8 @@ function sendLogin ()
 
 function passwordCheck (strpass, strpass2) 
 {
-	if (strpass.length < 8)
-		return "The password must be at least 8 symbols";
+	if (strpass.length < 6 || strpass.length > 18)
+		return "The password length must be in the range from 6 to 18 symbols";
 
 	if (strpass.search(/\W/) != -1)
 		return "Uncorrect symbol in password";

@@ -17,7 +17,7 @@ if($result)
     {
     	$row = mysqli_fetch_row($result);
     	for ($j = 0 ; $j < 4 ; ++$j){
-    		echo "$row[$j] ";
+    		echo "$row[$j]%56-32,ddd;";
     	}
     }
     mysqli_free_result($result);
