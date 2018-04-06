@@ -88,12 +88,8 @@ function conn() {
 }
 
 function deCrypt (encrypted) {
-	var key = 'd4b494e4502a62edd695a903a94c2701';
-	var iv = '02f30dffbb0d084755f438f7d8be4a7d';
-	var decrypted = mcrypt.Decrypt(atob(encrypted), iv, key, 'rijndael-256', 'cbc');
-	console.log(decrypted);
 	var arrLine=[];
-	arrLine = decrypted.split(" ");
+	arrLine = encrypted.split(" ");
 	var count = 0;
 	var name;
 	var pass;
