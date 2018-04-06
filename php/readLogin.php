@@ -25,7 +25,7 @@ if($result)
 	for ($i = 0 ; $i < $rows ; ++$i)
     {
     	$row = mysqli_fetch_row($result);
-    	for ($j = 0 ; $j < 4 ; ++$j){
+    	for ($j = 0 ; $j < 5 ; ++$j){
     		if ($row[$j] == $name) {
 				$str .= 'true' . " ";
 			} 
