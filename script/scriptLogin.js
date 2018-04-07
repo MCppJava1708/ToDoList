@@ -11,12 +11,12 @@ var lgn;
 /////////// Object Login //////////////////
 ///////////////////////////////////////////
 
-function Login (userNameOrEmail, password) {
+function Login(userNameOrEmail, password) {
 	this.userNameOrEmail = userNameOrEmail;
 	this.password = password;
 }
 
-Login.prototype.cheackUser = function(name, pass) {
+Login.prototype.cheackUser = function (name, pass) {
 	if (name === 'true' && pass === 'true') {
 		doc.location.href = "index.html?login=" + this.userNameOrEmail;
 	} else {
@@ -24,23 +24,23 @@ Login.prototype.cheackUser = function(name, pass) {
 	}
 }
 
-Login.prototype.loginRex = function(){
-	if (this.userNameOrEmail.search(/^[a-zA-Z0-9_-]{3,16}$/) !=-1 &&
-		this.password.search(/^[a-z0-9_-]{6,18}$/) !=-1) {
+Login.prototype.loginRex = function () {
+	if (this.userNameOrEmail.search(/^[a-zA-Z0-9_-]{3,16}$/) != -1 &&
+		this.password.search(/^[a-z0-9_-]{6,18}$/) != -1) {
 		readPHPCon(lgn.userNameOrEmail, lgn.password);
-} else if (this.userNameOrEmail.search( /^([a-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z\.]{2,6})$/) !=-1 &&
-	this.password.search(/^[a-z0-9_-]{6,18}$/) !=-1) {
-	readPHPCon(lgn.userNameOrEmail, lgn.password);
-} else {
-	shapeError();
-}
+	} else if (this.userNameOrEmail.search(/^([a-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z\.]{2,6})$/) != -1 &&
+		this.password.search(/^[a-z0-9_-]{6,18}$/) != -1) {
+		readPHPCon(lgn.userNameOrEmail, lgn.password);
+	} else {
+		shapeError();
+	}
 }
 
 ///////////////////////////////////////////
 /////////// Object User ///////////////////
 ///////////////////////////////////////////
 
-function User (id, login, email, password) {
+function User(id, login, email, password) {
 	this.id = id;
 	this.login = login;
 	this.email = email;
@@ -51,14 +51,14 @@ function User (id, login, email, password) {
 /////////// Error Shape ///////////////////
 ///////////////////////////////////////////
 
-function shapeError () {
+function shapeError() {
 	node = doc.createElement('div');
 	node.className = "divErr";
 	node.style.height = 50 + 'px';
 	node.innerHTML = "Incorrect username or password.";
 	node.style.color = '#000000FF';
 	node.style.borderRadius = 10 + 'px';
-	node.style.backgroundColor =  '#FF003DFF';
+	node.style.backgroundColor = '#FF003DFF';
 	divError.appendChild(node);
 	count++;
 }
@@ -87,8 +87,8 @@ function conn() {
 	}
 }
 
-function deCrypt (encrypted) {
-	var arrLine=[];
+function deCrypt(encrypted) {
+	var arrLine = [];
 	arrLine = encrypted.split(" ");
 	var count = 0;
 	var name;
@@ -96,14 +96,14 @@ function deCrypt (encrypted) {
 	for (var i = 0; i < arrLine.length; i++) {
 		switch (count) {
 			case 0:
-			name = arrLine[i];
-			count++;
-			break;
+				name = arrLine[i];
+				count++;
+				break;
 			case 1:
-			pass = arrLine[i];
-			lgn.cheackUser(name, pass);
-			count = 0;
-			break;
+				pass = arrLine[i];
+				lgn.cheackUser(name, pass);
+				count = 0;
+				break;
 		}
 	}
 }
@@ -116,7 +116,7 @@ doc.getElementById("btnSignIn").onclick = function () {
 	lgn = new Login(userNameOrEmail, password);
 	if (count > 1) {
 		divError.removeChild(node);
-	} 
+	}
 	lgn.loginRex();
 }
 
